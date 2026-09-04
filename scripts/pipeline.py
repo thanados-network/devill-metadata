@@ -22,7 +22,7 @@ def run_pipeline():
     4. Export to JSON-LD
     5. Export to CSV (Metadata)
     6. Export to CSV (Archaeological Objects)
-    7. Export to CSV (Cross-References)
+    7. Export to CSV (Object-File Relations)
     """
     start_time = time.time()
     print("=== Starting DeVill Metadata Pipeline ===")
@@ -52,8 +52,8 @@ def run_pipeline():
         print("\n--- Step 6: Exporting CSV (Archaeological Objects) ---")
         export_archaeological_objects()
 
-        # Step 7: CSV Export (Cross-References)
-        print("\n--- Step 7: Exporting CSV (Cross-References) ---")
+        # Step 7: CSV Export (Object-File Relations)
+        print("\n--- Step 7: Exporting CSV (Object-File Relations) ---")
         export_crossrefs()
 
         end_time = time.time()

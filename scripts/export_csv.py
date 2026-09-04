@@ -40,8 +40,8 @@ def export_csv():
 
         # Fields to extract for CSV
         csv_headers = [
-            'id', 'identifier', 'title', 'description_de', 'description_en', 
-            'subjects', 'spatial', 'temporal', 'created', 'type', 'rights',
+            'id', 'title', 'description_de', 'description_en', 
+            'subjects', 'spatial', 'temporal', 'created', 'filetype', 'mimetype', 'rights',
             'dataProvider', 'isShownAt', 'isShownBy', 'API_Endpoint'
         ]
 
@@ -64,9 +64,6 @@ def export_csv():
                     data['id'] = db_id
 
                     if cho is not None:
-                        # dc:identifier
-                        ident = cho.find('dc:identifier', ns)
-                        if ident is not None: data['identifier'] = ident.text
 
                         # dc:title
                         title = cho.find('dc:title', ns)
@@ -105,26 +102,47 @@ def export_csv():
                         created = cho.find('dcterms:created', ns)
                         if created is not None: data['created'] = created.text
 
-                        # edm:type
-                        etype = cho.find('edm:type', ns)
-                        if etype is not None: data['type'] = etype.text
-
                         # dc:rights
                         rights = cho.find('dc:rights', ns)
                         if rights is not None: data['rights'] = rights.text
 
                     if agg is not None:
-                        # edm:dataProvider
-                        dp = agg.find('edm:dataProvider', ns)
-                        if dp is not None: data['dataProvider'] = dp.text
-
                         # edm:isShownAt
                         at = agg.find('edm:isShownAt', ns)
-                        if at is not None: data['isShownAt'] = at.get('{%s}resource' % ns['rdf'])
+                        if at is not None:
+                            data['isShownAt'] = at.get('{%s}resource' % ns['rdf'])
 
                         # edm:isShownBy
                         by = agg.find('edm:isShownBy', ns)
-                        if by is not None: data['isShownBy'] = by.get('{%s}resource' % ns['rdf'])
+                        if by is not None:
+                            data['isShownBy'] = by.get('{%s}resource' % ns['rdf'])
+                            
+                        # Extract filetype and mimetype from URLs
+                        url_for_ext = data['isShownAt'] or data['isShownBy']
+                        if url_for_ext:
+                            # Try to find a file extension in the URL
+                            import posixpath
+                            from urllib.parse import urlparse
+                            path = urlparse(url_for_ext).path
+                            ext = posixpath.splitext(path)[1].lower().replace('.', '')
+                            
+                            if ext:
+                                data['filetype'] = ext
+                                # Common mimetypes mapping
+                                mime_map = {
+                                    'pdf': 'application/pdf',
+                                    'svg': 'image/svg+xml',
+                                    'png': 'image/png',
+                                    'jpg': 'image/jpeg',
+                                    'jpeg': 'image/jpeg',
+                                    'tif': 'image/tiff',
+                                    'tiff': 'image/tiff'
+                                }
+                                data['mimetype'] = mime_map.get(ext, 'application/octet-stream')
+
+                        # edm:dataProvider
+                        dp = agg.find('edm:dataProvider', ns)
+                        if dp is not None: data['dataProvider'] = dp.text
 
                     # API_Endpoint
                     data['API_Endpoint'] = f"https://thanados.openatlas.eu/api/entity/{db_id}"

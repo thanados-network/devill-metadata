@@ -10,7 +10,7 @@ from scripts.db_connect import connect
 def export_crossrefs():
     """
     Fetches file-to-object cross-references from devill.files and saves them as a CSV file
-    in data/crossrefs/crossrefs.csv.
+    in data/crossrefs/object_file_relation.csv.
     Checks if all parent_ids exist in the archaeological objects table.
     """
     conn = connect()
@@ -19,7 +19,7 @@ def export_crossrefs():
 
     # Define project root
     project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-    output_path = os.path.join(project_root, 'data', 'crossrefs', 'crossrefs.csv')
+    output_path = os.path.join(project_root, 'data', 'crossrefs', 'object_file_relation.csv')
     
     # Ensure the directory exists
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
