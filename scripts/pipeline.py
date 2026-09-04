@@ -11,6 +11,7 @@ from scripts.export_turtle import export_turtle
 from scripts.export_jsonld import export_jsonld
 from scripts.export_csv import export_csv
 from scripts.export_archaeological_objects import export_archaeological_objects
+from scripts.export_crossrefs import export_crossrefs
 
 def run_pipeline():
     """
@@ -21,6 +22,7 @@ def run_pipeline():
     4. Export to JSON-LD
     5. Export to CSV (Metadata)
     6. Export to CSV (Archaeological Objects)
+    7. Export to CSV (Cross-References)
     """
     start_time = time.time()
     print("=== Starting DeVill Metadata Pipeline ===")
@@ -49,6 +51,10 @@ def run_pipeline():
         # Step 6: CSV Export (Archaeological Objects)
         print("\n--- Step 6: Exporting CSV (Archaeological Objects) ---")
         export_archaeological_objects()
+
+        # Step 7: CSV Export (Cross-References)
+        print("\n--- Step 7: Exporting CSV (Cross-References) ---")
+        export_crossrefs()
 
         end_time = time.time()
         duration = end_time - start_time

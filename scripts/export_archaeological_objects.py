@@ -46,7 +46,9 @@ def export_archaeological_objects():
             openatlas_class_name AS class,
             geom AS geometry,
             lon,
-            lat
+            lat,
+            'https://devill.oegmn.or.at/entity/' || child_id AS devill_endpoint,
+            'https://thanados.openatlas.eu/api/entity/' || child_id AS "API_Endpoint"
         FROM devill.entitiestmp
         WHERE child_id != 0;
         """
