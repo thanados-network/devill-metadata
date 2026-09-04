@@ -1,0 +1,22 @@
+# IDE specific files
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+
+# Temporary files
+*.tmp
+*.log
+
+# Project specific exclusions (optional but common)
+node_modules/
+dist/
+build/
+bin/
+obj/
+
+# Config, instance and scripts folders
+#config/
+instance/
+#scripts/
