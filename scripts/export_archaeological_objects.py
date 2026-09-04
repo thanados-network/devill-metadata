@@ -35,22 +35,25 @@ def export_archaeological_objects():
         
         sql = """
         SELECT 
-            parent_id,
-            child_name AS name,
-            child_id AS id,
-            description,
-            begin_from,
-            begin_to,
-            end_from,
-            end_to,
-            openatlas_class_name AS class,
-            geom AS geometry,
-            lon,
-            lat,
-            'https://devill.oegmn.or.at/entity/' || child_id AS devill_endpoint,
-            'https://thanados.openatlas.eu/api/entity/' || child_id AS "API_Endpoint"
-        FROM devill.entitiestmp
-        WHERE child_id != 0;
+            e.parent_id,
+            e.child_name AS name,
+            e.child_id AS id,
+            m.name AS type,
+            m.path AS path,
+            e.description,
+            e.begin_from,
+            e.begin_to,
+            e.end_from,
+            e.end_to,
+            e.openatlas_class_name AS class,
+            e.geom AS geometry,
+            e.lon,
+            e.lat,
+            'https://devill.oegmn.or.at/entity/' || e.child_id AS devill_endpoint,
+            'https://thanados.openatlas.eu/api/entity/' || e.child_id AS "API_Endpoint"
+        FROM devill.entitiestmp e
+        LEFT JOIN devill.maintype m ON e.child_id = m.entity_id
+        WHERE e.child_id != 0;
         """
         
         print("Fetching data from devill.entitiestmp...")
