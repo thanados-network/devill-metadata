@@ -10,6 +10,7 @@ from scripts.export_rdf import export_rdf_collection
 from scripts.export_turtle import export_turtle
 from scripts.export_jsonld import export_jsonld
 from scripts.export_csv import export_csv
+from scripts.export_archaeological_objects import export_archaeological_objects
 
 def run_pipeline():
     """
@@ -18,7 +19,8 @@ def run_pipeline():
     2. Export to RDF/XML
     3. Export to Turtle
     4. Export to JSON-LD
-    5. Export to CSV
+    5. Export to CSV (Metadata)
+    6. Export to CSV (Archaeological Objects)
     """
     start_time = time.time()
     print("=== Starting DeVill Metadata Pipeline ===")
@@ -40,9 +42,13 @@ def run_pipeline():
         print("\n--- Step 4: Exporting JSON-LD ---")
         export_jsonld()
 
-        # Step 5: CSV Export
-        print("\n--- Step 5: Exporting CSV ---")
+        # Step 5: CSV Export (Metadata)
+        print("\n--- Step 5: Exporting CSV (Metadata) ---")
         export_csv()
+
+        # Step 6: CSV Export (Archaeological Objects)
+        print("\n--- Step 6: Exporting CSV (Archaeological Objects) ---")
+        export_archaeological_objects()
 
         end_time = time.time()
         duration = end_time - start_time
