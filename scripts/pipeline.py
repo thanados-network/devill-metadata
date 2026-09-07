@@ -12,6 +12,7 @@ from scripts.export_jsonld import export_jsonld
 from scripts.export_csv import export_csv
 from scripts.export_archaeological_objects import export_archaeological_objects
 from scripts.export_crossrefs import export_crossrefs
+from scripts.export_geojson import export_geojson
 
 def run_pipeline():
     """
@@ -23,6 +24,7 @@ def run_pipeline():
     5. Export to CSV (Metadata)
     6. Export to CSV (Archaeological Objects)
     7. Export to CSV (Object-File Relations)
+    8. Export to GeoJSON (Archaeological Places)
     """
     start_time = time.time()
     print("=== Starting DeVill Metadata Pipeline ===")
@@ -55,6 +57,10 @@ def run_pipeline():
         # Step 7: CSV Export (Object-File Relations)
         print("\n--- Step 7: Exporting CSV (Object-File Relations) ---")
         export_crossrefs()
+
+        # Step 8: GeoJSON Export (Archaeological Places)
+        print("\n--- Step 8: Exporting GeoJSON (Archaeological Places) ---")
+        export_geojson()
 
         end_time = time.time()
         duration = end_time - start_time

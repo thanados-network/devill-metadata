@@ -158,6 +158,7 @@ To facilitate seamless data integration, interoperability, and long-term digital
 - **RDF/XML (`.rdf`):** A formal Linked Data representation fully compatible with the **[Europeana Data Model (EDM)](https://pro.europeana.eu/page/edm-documentation)**.
 - **JSON-LD (`.jsonld`):** A JSON-based format for Linked Data, optimized for easy integration into modern web applications and APIs.
 - **Turtle (`.ttl`):** A concise, human-readable RDF syntax that simplifies the inspection and manual editing of semantic relationships.
+- **GeoJSON (`.geojson`):** A geographic data format containing all archaeological objects classified as `place` that possess spatial geometries, facilitating GIS integration and web mapping.
 
 While the CSV version is primarily designed for human review and basic tabular analysis, the RDF, JSON-LD, and Turtle exports provide a rich, graph-based representation of the data. These formats include granular semantic metadata and complex relationships—such as links to external authorities and specific CIDOC CRM mappings—that are not captured in the simplified CSV structure.
 
