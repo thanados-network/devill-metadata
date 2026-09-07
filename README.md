@@ -167,7 +167,7 @@ The file `data/archaeological_objects/archaeological_objects.csv` contains the f
 
 To facilitate seamless data integration, interoperability, and long-term digital preservation, the archaeological object dataset is provided in several standardized, machine-readable formats:
 
-- **RDF/XML (`.rdf`):** A formal Linked Data representation fully compatible with the **[Europeana Data Model (EDM)](https://pro.europeana.eu/page/edm-documentation)**.
+- **RDF/XML (`.rdf`):** A formal Linked Data representation based on the [Linked Art](`https://linked.art) profile for cultural heritage.
 - **JSON-LD (`.jsonld`):** A JSON-based format for Linked Data, optimized for easy integration into modern web applications and APIs.
 - **Turtle (`.ttl`):** A concise, human-readable RDF syntax that simplifies the inspection and manual editing of semantic relationships.
 - **GeoJSON (`.geojson`):** A geographic data format containing all archaeological objects classified as `place` that possess spatial geometries, facilitating GIS integration and web mapping.
