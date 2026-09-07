@@ -1,7 +1,7 @@
 # DeVill Metadata
 
 <p align="center">
-  <img src="https://devill.oegmn.or.at/static/images/logos/DeVill_Logo.png" alt="DeVill Logo" width="300">
+  <img src="assets/DeVill_Logo.png" alt="DeVill Logo" width="300">
 </p>
 
 Metadata dataset of the project ["The Digital Deserted Medieval Villages Archive" (DeVill)](https://devill.oegmn.or.at)
