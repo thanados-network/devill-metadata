@@ -1,11 +1,16 @@
 # DeVill Metadata
 
+<p align="center">
+  <img src="https://devill.oegmn.or.at/static/images/logos/DeVill_Logo.png" alt="DeVill Logo" width="300">
+</p>
+
 Metadata dataset of the project ["The Digital Deserted Medieval Villages Archive" (DeVill)](https://devill.oegmn.or.at)
 by the Austrian Society for Medieval and Modern Archaeology (ÖGMN).
 
 ## Table of Contents
 
 - [Overview](#overview)
+  - [Web Portal](#web-portal)
   - [Context](#context)
   - [Spatial Coverage](#spatial-coverage)
   - [Temporal Coverage](#temporal-coverage)
@@ -40,6 +45,13 @@ documentation created since the early 1970s (literature excerpts, written source
 with newly created digital outputs (georeferenced sketches, vector geometries, find catalogues, and 3D terrain models).
 In this repository, the metadata of the project is made available in human- and machine-readable formats.
 In addition to the tabular CSV format, the file metadata is available in semantic graph formats to ensure full compatibility with international metadata standards and digital archive aggregators.
+
+
+### Web Portal
+
+The project is accessible via a dedicated interactive web portal: **[https://devill.oegmn.or.at](https://devill.oegmn.or.at)**.
+
+![DeVill Web Portal Screenshot](assets/screenshot.png)
 
 ### Context
 DeVill digitised and structurally harmonised the long-running analogue deserted villages archive, formerly part of the Archive for Medieval Archaeology established in 1970/71. The archive was built up under Fritz Felgenhauer and later curated and expanded by the geographer Kurt Bors. As of August 2026, the archive records **2,612 sites** and related evidence. The 2023–2024 project aimed to secure this legacy archive through high-resolution digitisation, to normalise and interlink metadata following [CIDOC CRM](https://www.cidoc-crm.org/) principles, and to publish the results via a searchable catalogue and interactive map.
