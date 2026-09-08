@@ -146,9 +146,10 @@ This work was funded by the Austrian Federal Ministry for Arts, Culture, Civil S
 
 ## Dataset Description
 
-The dataset presented here represents human as well as machine readable metadata of the archive. 
-The dataset consists of two main components: First a list of deserted villages sites and their archaeologically relevant 
-components such as features, stratigraphic units and finds. Secondly, a list of associated files and their metadata. 
+The dataset presented here provides both human- and machine-readable metadata for the archive. It consists of
+two main components: first, a list of deserted village sites and their archaeologically relevant components
+(such as features, stratigraphic units, and finds); and second, a list of associated files and their metadata.
+These two components are linked (n:n) via their IDs in a cross-referencing table.
 
 
 ### 1. Archaeological Objects
