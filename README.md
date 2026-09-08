@@ -4,7 +4,7 @@
 
 
 # DeVill - The Digital Deserted Medieval Villages Archive of the Austrian Society for Medieval and Modern Archaeology. 
-## Metadataset of Archaeological Objects and Archive Files
+## Metadata Dataset of Archaeological Objects and Archive Files
 
 
 [![version](https://img.shields.io/badge/version-1.0-orange)](#)
