@@ -11,7 +11,7 @@ from scripts.db_connect import connect
 def export_jsonld():
     """
     Fetches data from devill_meta.xml_export and saves it as a JSON-LD file
-    in data/files/rdf/devill-file-metadata.jsonld.
+    in data/files/rdf/file-metadata.jsonld.
     """
     conn = connect()
     if conn is None:
@@ -19,7 +19,7 @@ def export_jsonld():
 
     # Define project root
     project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-    output_path = os.path.join(project_root, 'data', 'files', 'devill-file-metadata.jsonld')
+    output_path = os.path.join(project_root, 'data', 'files', 'file-metadata.jsonld')
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
 
     try:

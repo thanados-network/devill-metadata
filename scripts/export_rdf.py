@@ -9,7 +9,7 @@ from scripts.db_connect import connect
 def export_rdf_collection():
     """
     Fetches data from devill_meta.xml_export and saves it as an RDF collection
-    in data/files/rdf/devill-file-metadata.rdf.
+    in data/files/rdf/file-metadata.rdf.
     """
     conn = connect()
     if conn is None:
@@ -17,7 +17,7 @@ def export_rdf_collection():
 
     # Define project root
     project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-    output_path = os.path.join(project_root, 'data', 'files', 'devill-file-metadata.rdf')
+    output_path = os.path.join(project_root, 'data', 'files', 'file-metadata.rdf')
     
     # Ensure the directory exists
     os.makedirs(os.path.dirname(output_path), exist_ok=True)

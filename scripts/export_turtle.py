@@ -16,7 +16,7 @@ def escape_turtle(text):
 def export_turtle():
     """
     Fetches data from devill_meta.xml_export and saves it as a Turtle (.ttl) file
-    in data/files/rdf/devill-file-metadata.ttl.
+    in data/files/rdf/file-metadata.ttl.
     """
     conn = connect()
     if conn is None:
@@ -24,7 +24,7 @@ def export_turtle():
 
     # Define project root
     project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-    output_path = os.path.join(project_root, 'data', 'files', 'devill-file-metadata.ttl')
+    output_path = os.path.join(project_root, 'data', 'files', 'file-metadata.ttl')
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
 
     try:

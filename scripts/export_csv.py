@@ -11,7 +11,7 @@ from scripts.db_connect import connect
 def export_csv():
     """
     Fetches data from devill_meta.xml_export and saves it as a CSV file
-    in data/files/devill-file-metadata.csv.
+    in data/files/file-metadata.csv.
     """
     conn = connect()
     if conn is None:
@@ -19,7 +19,7 @@ def export_csv():
 
     # Define project root
     project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-    output_path = os.path.join(project_root, 'data', 'files', 'devill-file-metadata.csv')
+    output_path = os.path.join(project_root, 'data', 'files', 'file-metadata.csv')
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
 
     try:
@@ -136,7 +136,9 @@ def export_csv():
                                     'jpg': 'image/jpeg',
                                     'jpeg': 'image/jpeg',
                                     'tif': 'image/tiff',
-                                    'tiff': 'image/tiff'
+                                    'tiff': 'image/tiff',
+                                    'glb': 'model/gltf-binary',
+                                    'webp': 'image/webp'
                                 }
                                 data['mimetype'] = mime_map.get(ext, 'application/octet-stream')
 
