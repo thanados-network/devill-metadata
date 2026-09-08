@@ -50,6 +50,7 @@
     - [CSV Structure (Object-File Relations)](#csv-structure-object-file-relations)
 - [Installation & Setup](install.md)
 - [Project Structure](#project-structure)
+- [References and Related Publications](#references-and-related-publications)
 - [License](#license)
 
 
@@ -343,6 +344,28 @@ The file `data/crossrefs/object_file_relation.csv` contains the following fields
   - `crossrefs/`: Object-file relations between different entities.
 - `scripts/`: Python scripts for extraction and processing (see [install.md](install.md) for details.)
 - `config/`: Configuration templates (see [install.md](install.md) for details.).
+
+
+
+## References and Related Publications
+
+The following publications document the development, research history, technical basis, and archaeological application of DeVill. A more comprehensive bibliography is provided in the associated data paper.
+
+1. Filzwieser, R., Scharrer-Liška, G., Eichert, S., Kühtreiber, T., Kühtreiber, K., Huber, J. and Siegmeth, N. 2024. Digitising the Deserted Medieval Villages Archive of the Austrian Society for Medieval and Modern Archaeology: The ‘DeVill’ Project. *Medieval Settlement Research* 39: 93–97.
+
+2. Scharrer-Liška, G., Eichert, S. and Filzwieser, R. 2024. Die Entstehung des Wüstungsarchivs der Österreichischen Gesellschaft für Mittelalter- und Neuzeitarchäologie und seine Entwicklung zu DeVill. *Beiträge zur Mittelalter- und Neuzeitarchäologie in Österreich* 40: 184–199.
+
+3. Scharrer-Liška, G., Eichert, S. and Filzwieser, R. 2026. DeVill – die Datenbank mittelalterlicher und frühneuzeitlicher Ortswüstungen in Niederösterreich und anderen Bundesländern. In: Pieler, F. and Rammer, E. (eds), *Beiträge zum Tag der Niederösterreichischen Landesarchäologie 2026*. Veröffentlichungen aus den Landessammlungen Niederösterreich 20. St. Pölten: Land Niederösterreich, pp. 96–104.
+
+4. Eichert, S. 2014. OpenATLAS – An Open Source Database Application for Archaeological, Historical, and Spatial Data. In: *Proceedings of the 18th International Conference on Cultural Heritage and New Technologies 2013 (CHNT 18)*.
+
+5. Eichert, S. 2020. Digital Mapping of Medieval Cemeteries: Case Studies from Austria and Czechia. *Journal on Computing and Cultural Heritage* 14(1): Article 3, 1–15. https://doi.org/10.1145/3406535
+
+6. Filzwieser, R. and Eichert, S. 2020. Towards an Online Database for Archaeological Landscapes. Using the Web Based, Open Source Software OpenAtlas for the Acquisition, Analysis and Dissemination of Archaeological and Historical Data on a Landscape Basis. *Heritage* 3: 1385–1401. https://doi.org/10.3390/heritage3040077
+
+### Associated Data Paper
+
+The citation and DOI of the associated *Journal of Open Archaeology Data* data paper will be added here after publication.
 
 
 
