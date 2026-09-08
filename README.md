@@ -351,7 +351,7 @@ The file `data/crossrefs/object_file_relation.csv` contains the following fields
 
 The following publications document the development, research history, technical basis, and archaeological application of DeVill. A more comprehensive bibliography is provided in the associated data paper.
 
-1. Filzwieser, R., Scharrer-Liška, G., Eichert, S., Kühtreiber, T., Kühtreiber, K., Huber, J. and Siegmeth, N. 2024. Digitising the Deserted Medieval Villages Archive of the Austrian Society for Medieval and Modern Archaeology: The ‘DeVill’ Project. *Medieval Settlement Research* 39: 93–97.
+1. Filzwieser, R., Scharrer-Liška, G., Eichert, S., Kühtreiber, T., Kühtreiber, K., Huber, J. and Siegmeth, N. 2024. [Digitising the Deserted Medieval Villages Archive of the Austrian Society for Medieval and Modern Archaeology: The ‘DeVill’ Project](https://archaeopresspublishing.com/ojs/index.php/msr/article/view/2716). *Medieval Settlement Research* 39: 93–97.
 
 2. Scharrer-Liška, G., Eichert, S. and Filzwieser, R. 2024. Die Entstehung des Wüstungsarchivs der Österreichischen Gesellschaft für Mittelalter- und Neuzeitarchäologie und seine Entwicklung zu DeVill. *Beiträge zur Mittelalter- und Neuzeitarchäologie in Österreich* 40: 184–199.
 
