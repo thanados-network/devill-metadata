@@ -14,13 +14,13 @@
 
 **Authors:**   
 *[Filzwieser, Roland](https://orcid.org/0000-0002-5523-9524) [![orcID](/assets/ORCID-iD_icon-vector.svg)](https://orcid.org/0000-0002-5523-9524);*
-*[Scharrer-Liška, Gabriele](https://orcid.org/0000-0000-0000-0000) [![orcID](/assets/ORCID-iD_icon-vector.svg)](https://orcid.org/0000-0000-0000-0000);*
+*[Scharrer-Liška, Gabriele](https://orcid.org/0000-0002-1106-9666) [![orcID](/assets/ORCID-iD_icon-vector.svg)](https://orcid.org/0000-0002-1106-9666);*
 *[Eichert, Stefan](https://orcid.org/0000-0002-5827-0797) [![orcID](/assets/ORCID-iD_icon-vector.svg)](https://orcid.org/0000-0002-5827-0797);*
-*[Kühtreiber, Karin](https://orcid.org/0000-0000-0000-0000) [![orcID](/assets/ORCID-iD_icon-vector.svg)](https://orcid.org/0000-0000-0000-0000);*
-*[Huber, Jacqueline](https://orcid.org/0000-0000-0000-0000) [![orcID](/assets/ORCID-iD_icon-vector.svg)](https://orcid.org/0000-0000-0000-0000);*
-*[Siegmeth, Nora](https://orcid.org/0000-0000-0000-0000) [![orcID](/assets/ORCID-iD_icon-vector.svg)](https://orcid.org/0000-0000-0000-0000);*
-*[Koschiček-Krombholz, Bernhard](https://orcid.org/0000-0000-0000-0000) [![orcID](/assets/ORCID-iD_icon-vector.svg)](https://orcid.org/0000-0000-0000-0000);*
-*[Kühtreiber, Thomas](https://orcid.org/0000-0000-0000-0000) [![orcID](/assets/ORCID-iD_icon-vector.svg)](https://orcid.org/0000-0000-0000-0000);*
+*[Kühtreiber, Karin](https://orcid.org/0009-0005-7551-0958) [![orcID](/assets/ORCID-iD_icon-vector.svg)](https://orcid.org/0009-0005-7551-0958);*
+*[Huber, Jacqueline](https://orcid.org/0009-0007-7416-3119) [![orcID](/assets/ORCID-iD_icon-vector.svg)](https://orcid.org/0009-0007-7416-3119);*
+*[Siegmeth, Nora](https://orcid.org/0009-0002-7423-4179) [![orcID](/assets/ORCID-iD_icon-vector.svg)](https://orcid.org/0009-0002-7423-4179);*
+*[Koschiček-Krombholz, Bernhard](https://orcid.org/0000-0001-7608-7446) [![orcID](/assets/ORCID-iD_icon-vector.svg)](https://orcid.org/0000-0001-7608-7446);*
+*[Kühtreiber, Thomas](https://orcid.org/0000-0001-8338-668X) [![orcID](/assets/ORCID-iD_icon-vector.svg)](https://orcid.org/0000-0001-8338-668X);*
 
 
 ## Table of Contents
