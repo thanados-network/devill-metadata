@@ -320,7 +320,7 @@ graph TD
     oid1 --- rid1
     fid1 --- rfid1
 ```
-*Figure 4: Example of relations between an archaeological object and a file metadata record.*
+*Figure 3: Example of relations between an archaeological object and a file metadata record.*
 
 #### CSV Structure (Object-File Relations)
 The file `data/crossrefs/object_file_relation.csv` contains the following fields:
