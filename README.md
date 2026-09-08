@@ -1,12 +1,27 @@
-# DeVill Metadata
-
 <p align="center">
   <img src="assets/DeVill_Logo.png" alt="DeVill Logo" width="300"><br>
-  <em>Figure 1: DeVill Project Logo</em>
 </p>
 
-Metadata dataset of the project ["The Digital Deserted Medieval Villages Archive" (DeVill)](https://devill.oegmn.or.at)
-by the Austrian Society for Medieval and Modern Archaeology (ÖGMN).
+
+# DeVill - The Digital Deserted Medieval Villages Archive of the Austrian Society for Medieval and Modern Archaeology. 
+## Metadataset of Archaeological Objects and Archive Files
+
+
+[![version](https://img.shields.io/badge/version-1.0-orange)](#)
+[![license](https://img.shields.io/badge/license-CC--BY--4.0-brightgreen)](https://creativecommons.org/licenses/by/4.0/)
+[![date](https://img.shields.io/badge/date-2026--09--09-green)](#)
+[![doi](https://img.shields.io/badge/DOI-00.0000/zenodo.00000-blue)](https://doi.org/00.0000/zenodo.00000)
+
+**Authors:**   
+*[Filzwieser, Roland](https://orcid.org/0000-0000-0000-0000) [![orcID](/assets/ORCID-iD_icon-vector.svg)](https://orcid.org/0000-0000-0000-0000);*
+*[Scharrer-Liška, Gabriele](https://orcid.org/0000-0000-0000-0000) [![orcID](/assets/ORCID-iD_icon-vector.svg)](https://orcid.org/0000-0000-0000-0000);*
+*[Eichert, Stefan](https://orcid.org/0000-0002-5827-0797) [![orcID](/assets/ORCID-iD_icon-vector.svg)](https://orcid.org/0000-0002-5827-0797);*
+*[Kühtreiber, Karin](https://orcid.org/0000-0000-0000-0000) [![orcID](/assets/ORCID-iD_icon-vector.svg)](https://orcid.org/0000-0000-0000-0000);*
+*[Huber, Jacqueline](https://orcid.org/0000-0000-0000-0000) [![orcID](/assets/ORCID-iD_icon-vector.svg)](https://orcid.org/0000-0000-0000-0000);*
+*[Siegmeth, Nora](https://orcid.org/0000-0000-0000-0000) [![orcID](/assets/ORCID-iD_icon-vector.svg)](https://orcid.org/0000-0000-0000-0000);*
+*[Koschiček-Krombholz, Bernhard](https://orcid.org/0000-0000-0000-0000) [![orcID](/assets/ORCID-iD_icon-vector.svg)](https://orcid.org/0000-0000-0000-0000);*
+*[Kühtreiber, Thomas](https://orcid.org/0000-0000-0000-0000) [![orcID](/assets/ORCID-iD_icon-vector.svg)](https://orcid.org/0000-0000-0000-0000);*
+
 
 ## Table of Contents
 
@@ -52,7 +67,7 @@ In addition to the tabular CSV format, the file metadata is available in semanti
 The project is accessible via a dedicated interactive web portal: **[https://devill.oegmn.or.at](https://devill.oegmn.or.at)**.
 
 ![DeVill Web Portal Screenshot](assets/screenshot.png)
-*Figure 2: Screenshot of the interactive DeVill web portal.*
+*Figure 1: Screenshot of the interactive DeVill web portal.*
 
 ### Context
 DeVill digitised and structurally harmonised the long-running analogue deserted villages archive, formerly part of the Archive for Medieval Archaeology established in 1970/71. The archive was built up under Fritz Felgenhauer and later curated and expanded by the geographer Kurt Bors. As of August 2026, the archive records **2,612 sites** and related evidence. The 2023–2024 project aimed to secure this legacy archive through high-resolution digitisation, to normalise and interlink metadata following [CIDOC CRM](https://www.cidoc-crm.org/) principles, and to publish the results via a searchable catalogue and interactive map.
@@ -180,7 +195,7 @@ graph TD
     id2 -- "1 : n" --> pid3
     id3 -- "1 : n" --> pid4
 ```
-*Figure 3: Example hierarchical structure of archaeological objects (Place > Feature > Stratigraphic Unit > Artifact).*
+*Figure 2: Example hierarchical structure of archaeological objects (Place > Feature > Stratigraphic Unit > Artifact).*
 
 #### CSV Structure (Archaeological Objects)
 The file `data/archaeological_objects/archaeological_objects.csv` contains the following fields:
@@ -335,4 +350,6 @@ The file `data/crossrefs/object_file_relation.csv` contains the following fields
 
 ## License
 
-This project is licensed under the **[Creative Commons Attribution 4.0 International (CC BY 4.0)](LICENSE)** license.
+This project, including all metadata and documentation in this repository, is licensed under the **[Creative Commons Attribution 4.0 International (CC BY 4.0)](LICENSE)** license.
+
+For digital objects (files) referenced via URLs in the metadata, the license of the original source applies. Please refer to the respective landing pages for specific licensing and usage terms.
