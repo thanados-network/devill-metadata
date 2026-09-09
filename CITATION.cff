@@ -26,7 +26,26 @@ authors:
     given-names: Thomas
     orcid: "https://orcid.org/0000-0001-8338-668X"
 title: "DeVill - The Digital Deserted Medieval Villages Archive of the Austrian Society for Medieval and Modern Archaeology. Metadata Dataset of Archaeological Objects and Archive Files"
+type: dataset
+contact:
+  - name: "Austrian Society for Medieval and Modern Archaeology (ÖGMN)"
+    address: "c/o University of Vienna, Franz-Klein-Gasse 1"
+    city: "Vienna"
+    post-code: "1190"
+    country: AT
+    website: "https://oegmn.or.at"
 version: 1.0
+repository-code: "https://github.com/thanados-network/devill-metadata"
+keywords:
+  - archaeology
+  - deserted villages
+  - metadata
+  - middle ages
+  - early modern period
+  - lower austria
+  - open data
+  - CIDOC CRM
+  - linked data
 date-released: 2026-09-09
 url: "https://devill.oegmn.or.at"
 license: CC-BY-4.0

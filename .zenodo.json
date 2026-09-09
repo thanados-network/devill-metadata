@@ -1,0 +1,72 @@
+{
+  "title": "DeVill - The Digital Deserted Medieval Villages Archive of the Austrian Society for Medieval and Modern Archaeology. Metadata Dataset of Archaeological Objects and Archive Files",
+  "creators": [
+    {
+      "name": "Filzwieser, Roland",
+      "orcid": "0000-0002-5523-9524",
+      "affiliation": "Austrian Society for Medieval and Modern Archaeology (ÖGMN)"
+    },
+    {
+      "name": "Scharrer-Liška, Gabriele",
+      "orcid": "0000-0002-1106-9666",
+      "affiliation": "Austrian Society for Medieval and Modern Archaeology (ÖGMN)"
+    },
+    {
+      "name": "Eichert, Stefan",
+      "orcid": "0000-0002-5827-0797",
+      "affiliation": "Natural History Museum Vienna"
+    },
+    {
+      "name": "Kühtreiber, Karin",
+      "orcid": "0009-0005-7551-0958",
+      "affiliation": "Austrian Society for Medieval and Modern Archaeology (ÖGMN)"
+    },
+    {
+      "name": "Huber, Jacqueline",
+      "orcid": "0009-0007-7416-3119",
+      "affiliation": "Austrian Society for Medieval and Modern Archaeology (ÖGMN)"
+    },
+    {
+      "name": "Siegmeth, Nora",
+      "orcid": "0009-0002-7423-4179",
+      "affiliation": "Austrian Society for Medieval and Modern Archaeology (ÖGMN)"
+    },
+    {
+      "name": "Koschiček-Krombholz, Bernhard",
+      "orcid": "0000-0001-7608-7446",
+      "affiliation": "Austrian Society for Medieval and Modern Archaeology (ÖGMN)"
+    },
+    {
+      "name": "Kühtreiber, Thomas",
+      "orcid": "0000-0001-8338-668X",
+      "affiliation": "Austrian Society for Medieval and Modern Archaeology (ÖGMN)"
+    }
+  ],
+  "description": "DeVill provides open online access to the digitised deserted villages archive of the ÖGMN. The data aggregates legacy documentation created since the early 1970s together with newly created digital outputs. In this repository, the metadata of the project is made available in human- and machine-readable formats.",
+  "keywords": [
+    "archaeology",
+    "deserted villages",
+    "metadata",
+    "middle ages",
+    "early modern period",
+    "lower austria",
+    "open data",
+    "CIDOC CRM",
+    "linked data"
+  ],
+  "upload_type": "dataset",
+  "access_right": "open",
+  "license": "CC-BY-4.0",
+  "language": "eng",
+  "contributors": [
+    {
+      "name": "Natural History Museum Vienna",
+      "type": "HostingInstitution"
+    },
+    {
+      "name": "Austrian Society for Medieval and Modern Archaeology (ÖGMN)",
+      "type": "Distributor"
+    }
+  ],
+  "notes": "Funding: Austrian Federal Ministry for Arts, Culture, Civil Service and Sport (BMKÖS), programme 'Kulturerbe Digital' (NextGenerationEU), GZ: 2023-0.257.819."
+}
