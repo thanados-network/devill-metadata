@@ -10,7 +10,7 @@
 [![version](https://img.shields.io/badge/version-1.0-orange)](#)
 [![license](https://img.shields.io/badge/license-CC--BY--4.0-brightgreen)](https://creativecommons.org/licenses/by/4.0/)
 [![date](https://img.shields.io/badge/date-2026--09--09-green)](#)
-<!-- [![doi](https://img.shields.io/badge/DOI-00.0000/zenodo.00000-blue)](https://doi.org/00.0000/zenodo.00000) -->
+[![doi](https://img.shields.io/badge/DOI-10.5281/zenodo.22672084-blue)](https://doi.org/10.5281/zenodo.22672084)
 
 **Authors:**   
 *[Filzwieser, Roland](https://orcid.org/0000-0002-5523-9524) [![orcID](/assets/ORCID-iD_icon-vector.svg)](https://orcid.org/0000-0002-5523-9524);*
