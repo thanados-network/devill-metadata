@@ -42,7 +42,7 @@ def export_csv():
         csv_headers = [
             'id', 'title', 'description_de', 'description_en', 
             'subjects', 'spatial', 'temporal', 'created', 'filetype', 'mimetype', 'rights',
-            'dataProvider', 'isShownAt', 'isShownBy', 'API_Endpoint'
+            'data_provider', 'is_shown_at', 'is_shown_by', 'api_endpoint'
         ]
 
         print(f"Writing CSV export to {output_path}...")
@@ -110,15 +110,15 @@ def export_csv():
                         # edm:isShownAt
                         at = agg.find('edm:isShownAt', ns)
                         if at is not None:
-                            data['isShownAt'] = at.get('{%s}resource' % ns['rdf'])
+                            data['is_shown_at'] = at.get('{%s}resource' % ns['rdf'])
 
                         # edm:isShownBy
                         by = agg.find('edm:isShownBy', ns)
                         if by is not None:
-                            data['isShownBy'] = by.get('{%s}resource' % ns['rdf'])
+                            data['is_shown_by'] = by.get('{%s}resource' % ns['rdf'])
                             
                         # Extract filetype and mimetype from URLs
-                        url_for_ext = data['isShownAt'] or data['isShownBy']
+                        url_for_ext = data['is_shown_at'] or data['is_shown_by']
                         if url_for_ext:
                             # Try to find a file extension in the URL
                             import posixpath
@@ -144,10 +144,10 @@ def export_csv():
 
                         # edm:dataProvider
                         dp = agg.find('edm:dataProvider', ns)
-                        if dp is not None: data['dataProvider'] = dp.text
+                        if dp is not None: data['data_provider'] = dp.text
 
-                    # API_Endpoint
-                    data['API_Endpoint'] = f"https://thanados.openatlas.eu/api/entity/{db_id}"
+                    # api_endpoint
+                    data['api_endpoint'] = f"https://thanados.openatlas.eu/api/entity/{db_id}"
 
                     writer.writerow(data)
 

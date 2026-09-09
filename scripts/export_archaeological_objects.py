@@ -51,7 +51,7 @@ def export_archaeological_objects():
             e.lon,
             e.lat,
             'https://devill.oegmn.or.at/entity/' || e.child_id AS devill_endpoint,
-            'https://thanados.openatlas.eu/api/entity/' || e.child_id AS "API_Endpoint"
+            'https://thanados.openatlas.eu/api/entity/' || e.child_id AS api_endpoint
         FROM devill.entitiestmp e
         LEFT JOIN devill.maintype m ON e.child_id = m.entity_id
         WHERE e.child_id != 0;
