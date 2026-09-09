@@ -10,7 +10,7 @@
 [![version](https://img.shields.io/badge/version-1.0-orange)](#)
 [![license](https://img.shields.io/badge/license-CC--BY--4.0-brightgreen)](https://creativecommons.org/licenses/by/4.0/)
 [![date](https://img.shields.io/badge/date-2026--09--09-green)](#)
-[![doi](https://img.shields.io/badge/DOI-00.0000/zenodo.00000-blue)](https://doi.org/00.0000/zenodo.00000)
+<!-- [![doi](https://img.shields.io/badge/DOI-00.0000/zenodo.00000-blue)](https://doi.org/00.0000/zenodo.00000) -->
 
 **Authors:**   
 *[Filzwieser, Roland](https://orcid.org/0000-0002-5523-9524) [![orcID](/assets/ORCID-iD_icon-vector.svg)](https://orcid.org/0000-0002-5523-9524);*
@@ -363,10 +363,6 @@ The following publications document the development, research history, technical
 5. Eichert, S. 2020. Digital Mapping of Medieval Cemeteries: Case Studies from Austria and Czechia. *Journal on Computing and Cultural Heritage* 14(1): Article 3, 1–15. https://doi.org/10.1145/3406535
 
 6. Filzwieser, R. and Eichert, S. 2020. Towards an Online Database for Archaeological Landscapes. Using the Web Based, Open Source Software OpenAtlas for the Acquisition, Analysis and Dissemination of Archaeological and Historical Data on a Landscape Basis. *Heritage* 3: 1385–1401. https://doi.org/10.3390/heritage3040077
-
-### Associated Data Paper
-
-The citation and DOI of the associated *Journal of Open Archaeology Data* data paper will be added here after publication.
 
 
 

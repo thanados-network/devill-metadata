@@ -1,0 +1,37 @@
+cff-version: 1.2.0
+message: "If you use this dataset, please cite it as below."
+authors:
+  - family-names: Filzwieser
+    given-names: Roland
+    orcid: "https://orcid.org/0000-0002-5523-9524"
+  - family-names: Scharrer-Liška
+    given-names: Gabriele
+    orcid: "https://orcid.org/0000-0002-1106-9666"
+  - family-names: Eichert
+    given-names: Stefan
+    orcid: "https://orcid.org/0000-0002-5827-0797"
+  - family-names: Kühtreiber
+    given-names: Karin
+    orcid: "https://orcid.org/0009-0005-7551-0958"
+  - family-names: Huber
+    given-names: Jacqueline
+    orcid: "https://orcid.org/0009-0007-7416-3119"
+  - family-names: Siegmeth
+    given-names: Nora
+    orcid: "https://orcid.org/0009-0002-7423-4179"
+  - family-names: Koschiček-Krombholz
+    given-names: Bernhard
+    orcid: "https://orcid.org/0000-0001-7608-7446"
+  - family-names: Kühtreiber
+    given-names: Thomas
+    orcid: "https://orcid.org/0000-0001-8338-668X"
+title: "DeVill - The Digital Deserted Medieval Villages Archive of the Austrian Society for Medieval and Modern Archaeology. Metadata Dataset of Archaeological Objects and Archive Files"
+version: 1.0
+date-released: 2026-09-09
+url: "https://devill.oegmn.or.at"
+license: CC-BY-4.0
+abstract: >-
+  DeVill provides open online access to the digitised deserted villages archive of the ÖGMN. 
+  The data aggregates legacy documentation created since the early 1970s together with newly 
+  created digital outputs. In this repository, the metadata of the project is made available 
+  in human- and machine-readable formats.
