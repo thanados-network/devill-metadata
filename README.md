@@ -78,9 +78,9 @@ DeVill digitised and structurally harmonised the long-running analogue deserted 
 The dataset primarily covers **Lower Austria**, but also includes sites in the Austrian states of **Burgenland, Upper Austria, Styria, and Vorarlberg**.
 
 - **Northern boundary:** 48.97595
-- **Southern boundary:** 46.83629
-- **Eastern boundary:** 17.09512
-- **Western boundary:** 9.69078
+- **Southern boundary:** 46.83630
+- **Eastern boundary:** 17.09513
+- **Western boundary:** 9.69079
 
 ```geojson
 {
@@ -89,11 +89,11 @@ The dataset primarily covers **Lower Austria**, but also includes sites in the A
     "type": "Polygon",
     "coordinates": [
       [
-        [9.69078, 48.97595],
-        [17.09512, 48.97595],
-        [17.09512, 46.83629],
-        [9.69078, 46.83629],
-        [9.69078, 48.97595]
+        [9.69079, 48.97595],
+        [17.09513, 48.97595],
+        [17.09513, 46.83630],
+        [9.69079, 46.83630],
+        [9.69079, 48.97595]
       ]
     ]
   },
