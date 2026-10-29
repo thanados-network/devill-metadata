@@ -205,7 +205,7 @@ The file `data/archaeological_objects/archaeological_objects.csv` contains the f
 | Column | Description | Example |
 | :--- | :--- | :--- |
 | `parent_id` | Identifier of the parent entity (if applicable). | |
-| `name` | Name of the archaeological object or site. | `Dernberg Castle` |
+| `name` | Name of the archaeological object or site. An asterisk appended to a site name (e.g. Trennau* or Landgraben Nord*) indicates a modern working title assigned to an archaeologically identified settlement that cannot be securely linked to a historically attested place name. The asterisk therefore refers to the status of the name and does not indicate spatial or localisation uncertainty. | `Dernberg Castle` |
 | `id` | Unique identifier for the object (OpenAtlas based). | `173247` |
 | `type` | Specific type of the object. | `Abandoned Fortification` |
 | `path` | Full hierarchy path of the object type. | `Place > Military Facility...` |
