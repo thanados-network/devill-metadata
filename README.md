@@ -155,6 +155,7 @@ These two components are linked (n:n) via their IDs in a cross-referencing table
 ### 1. Archaeological Objects
 Detailed information about deserted medieval villages and related archaeological sites, including:
 - **Spatial Data:** Point coordinates (WGS84) and where applicable polygon or linestring geometries.
+- **Spatial uncertainty:** Spatial precision varies according to the heterogeneous legacy documentation. Some polygons represent potential localisation areas rather than securely delimited settlement extents. No uniform quantitative positional-accuracy measure is available in the legacy archive.
 - **Temporal Data:** Dating information (Begin/End ranges).
 - **Descriptive Metadata:** Detailed descriptions of the sites, including historical context and sources.
 - **Classification:** Categorization based on the OpenAtlas type system (e.g., Abandoned Village, Fortification).

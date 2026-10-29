@@ -48,8 +48,8 @@ def export_archaeological_objects():
             e.openatlas_class_name AS class,
             e.geom AS "GeoJSON",
             ST_AsText(e.geom) AS "WKT",
-            e.lon,
-            e.lat,
+            e.lat AS lon,
+            e.lon AS lat,
             'https://devill.oegmn.or.at/entity/' || e.child_id AS devill_endpoint,
             'https://thanados.openatlas.eu/api/entity/' || e.child_id AS api_endpoint
         FROM devill.entitiestmp e
