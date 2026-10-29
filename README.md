@@ -210,8 +210,10 @@ The file `data/archaeological_objects/archaeological_objects.csv` contains the f
 | `type` | Specific type of the object. | `Abandoned Fortification` |
 | `path` | Full hierarchy path of the object type. | `Place > Military Facility...` |
 | `description` | Detailed historical description and sources. | `In 1208 Hadmar v. Kuenring...` |
-| `begin_from` / `begin_to` | Start date range for the object's existence. | `1200` / `1208` |
-| `end_from` / `end_to` | End date range for the object's existence. | `1300` / `1321` |
+| `begin_from` | Earliest possible beginning of the entity's time-span (year CE); corresponds to CIDOC CRM P82a begin of the begin. | `1200` |
+| `begin_to` | Latest possible beginning of the entity's time-span (year CE); corresponds to CIDOC CRM P81a end of the begin. | `1208` |
+| `end_from` | Earliest possible end of the entity's time-span (year CE); corresponds to CIDOC CRM P81b begin of the end. | `1300` |
+| `end_to` | Latest possible end of the entity's time-span (year CE); corresponds to CIDOC CRM P82b end of the end. | `1321` |
 | `class` | Broad classification (e.g., place). | `place` |
 | `geojson` | GeoJSON representation of the geometry. | `{"type":"Point","coordinates":[16.177, 48.617]}` |
 | `wkt` | Well-Known Text (WKT) representation of the geometry. | `POINT(16.177 48.617)` |
