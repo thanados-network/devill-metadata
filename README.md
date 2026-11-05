@@ -207,7 +207,7 @@ graph TD
 *Figure 2: Example hierarchical structure of archaeological objects (Place > Feature > Stratigraphic Unit > Artifact).*
 
 #### Temporal Concept
-Each entity can have up to four dates (`begin_from`, `begin_to`, `end_from`, `end_to`), following the [OpenAtlas date model](https://redmine.openatlas.eu/issues/2156). Which of the fields are filled determines the meaning of the dating:
+Each entity can have up to four dates (`begin_from`, `begin_to`, `end_from`, `end_to`), following the [OpenAtlas date model](https://redmine.openatlas.eu/projects/uni/wiki/Expanded_dates). Which of the fields are filled determines the meaning of the dating:
 
 | Dating information | Meaning | Filled fields | Example |
 | :--- | :--- | :--- | :--- |
