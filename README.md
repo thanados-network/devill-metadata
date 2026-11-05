@@ -218,7 +218,7 @@ The file `data/archaeological_objects/archaeological_objects.csv` contains the f
 | `class` | Broad classification (e.g., place). | `place` |
 | `geojson` | GeoJSON representation of the geometry. | `{"type":"Point","coordinates":[16.177, 48.617]}` |
 | `wkt` | Well-Known Text (WKT) representation of the geometry. | `POINT(16.177 48.617)` |
-| `geometry_quality` | Quality of the geometry (`type` field of `model.gis`, linked to the entity via `model.link` with property `P53`). A single value matching the exported geometry: `centerpoint` for points, `area` or `shape` for polygons. Only set for objects with a geometry. | `centerpoint` |
+| `geometry_quality` | Quality of the localisation: `centerpoint` is a single point recorded as the location of the site; `area` is an area within which the site has been located; `shape` is a polygon that marks the physical extent of the site. | `centerpoint`, `area`, `shape` |
 | `lon` / `lat` | Longitude and latitude coordinates (WGS84). | `16.1779` / `48.6177` |
 | `devill_endpoint` | URL to the object in the DeVill archive. | `https://devill.oegmn.or.at/entity/173247` |
 | `api_endpoint` | Link to the OpenAtlas API record for this object. | `https://thanados.openatlas.eu/api/entity/173247` |
