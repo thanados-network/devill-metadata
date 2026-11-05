@@ -38,6 +38,7 @@
 - [Funding Statement](#funding-statement)
 - [Dataset Description](#dataset-description)
   - [1. Archaeological Objects](#1-archaeological-objects)
+    - [Temporal Concept](#temporal-concept)
     - [CSV Structure (Archaeological Objects)](#csv-structure-archaeological-objects)
     - [Machine Readable Formats (Archaeological Objects)](#machine-readable-formats-archaeological-objects)
       - [Ontologies & Namespaces](#ontologies--namespaces)
@@ -155,8 +156,11 @@ These two components are linked (n:n) via their IDs in a cross-referencing table
 ### 1. Archaeological Objects
 Detailed information about deserted medieval villages and related archaeological sites, including:
 - **Spatial Data:** Point coordinates (WGS84) and where applicable polygon or linestring geometries.
-- **Spatial uncertainty:** Spatial precision varies according to the heterogeneous legacy documentation. Some polygons represent potential localisation areas rather than securely delimited settlement extents. No uniform quantitative positional-accuracy measure is available in the legacy archive.
-- **Temporal Data:** Dating information (Begin/End ranges).
+- **Spatial quality:** Due to the heterogeneous legacy documentation, spatial precision varies. The digitised archive 
+therefore applies a concept that assumes 100% certainty of the localisation but allows for varying precision. 
+It distinguishes three cases: (1) a point that lies within the site and represents its central location, (2) a polygon 
+representing the area within which the site is definitely located, and (3) a polygon representing the precise extent of the site.
+- **Temporal Data:** Dating information is recorded as time spans for the beginning and the end of an entity. This makes it possible to express uncertain or vague dating as well as *termini post*, *ante* and *ad/a quo/ab quo* without losing information (see [Temporal Concept](#temporal-concept)).
 - **Descriptive Metadata:** Detailed descriptions of the sites, including historical context and sources.
 - **Classification:** Categorization based on the OpenAtlas type system (e.g., Abandoned Village, Fortification).
 - **Identifiers:** Internal IDs and links to the official DeVill and Thanados endpoints.
@@ -200,6 +204,40 @@ graph TD
 ```
 *Figure 2: Example hierarchical structure of archaeological objects (Place > Feature > Stratigraphic Unit > Artifact).*
 
+#### Temporal Concept
+Each entity can have up to four dates (`begin_from`, `begin_to`, `end_from`, `end_to`), following the [OpenAtlas date model](https://redmine.openatlas.eu/issues/2156). Which of the fields are filled determines the meaning of the dating:
+
+| Dating information | Meaning | Filled fields | Example |
+| :--- | :--- | :--- | :--- |
+| *Terminus post quem* | Earliest possible boundary: the event happened **after** this date. | Only `begin_from` (for a beginning) or only `end_from` (for an end). | A coin minted in AD 337 found in a grave: the burial cannot have started before then (`begin_from = 0337-01-01`). A person is mentioned as a witness for the last time in a charter of February 945: the person cannot have died before then (`end_from = 0945-02-01`). |
+| *Terminus ante quem* | Latest possible boundary: the event happened **before** this date. | Only `begin_to` (for a beginning) or only `end_to` (for an end). | A person is mentioned for the first time in a charter of 15 August 1348: the person must have been born at the latest on that day (`begin_to = 1348-08-15`). An archaeological layer is sealed by the eruption of AD 79: the occupation must have ended before (`end_to = 0079-08-24`). |
+| *Terminus ad quem / a quo / ab quo* | A fixed point or period at which something begins or ends: the exact window is known. | `begin_from` and `begin_to`, or `end_from` and `end_to`. | A parish register records a birth on 12 November 1650 (`begin_from = 1650-11-12 00:00`, `begin_to = 1650-11-12 23:59`). A city chronicle records that a fortress was demolished during a siege between June and August 1480 (`end_from = 1480-06-01`, `end_to = 1480-08-31`). |
+
+In OpenAtlas the dates are stored as timestamps in the fields `begin_from`, `begin_to`, `end_from` and `end_to`.
+
+This concept is inspired by the temporal model of [GeoJSON-T](https://github.com/kgeographer/geojson-t), which describes 
+the `start` and the `end` of a `when` timespan, each with an `earliest` and a `latest` value. Accordingly, `begin_from` 
+and `begin_to` correspond to the earliest and latest possible beginning, and `end_from` and `end_to` to the earliest and
+latest possible end.
+
+A similar approach is used in CIDOC CRM-based [Linked Art](https://linked.art/api/1.0/shared/timespan/), whose `TimeSpan` 
+describes both the beginning and the end by a lower and an upper boundary: `begin_of_the_begin` and `end_of_the_begin` 
+for the beginning, and `begin_of_the_end` and `end_of_the_end` for the end. These correspond to `begin_from`, `begin_to`
+, `end_from` and `end_to` respectively.
+
+In the CIDOC CRM, OpenAtlas models each of these dates as a time primitive. The temporal entity (`E2 Temporal Entity`) 
+that represents the (earliest respectively latest) beginning or the end of the archaeological object is linked via `P4 has time span` to an 
+`E52 Time-Span`. The time span is in turn linked via `P81 ongoing throughout` to an `E61 Time Primitive`, which holds 
+the timestamp of the earliest or latest possible date:
+
+```
+E2 Temporal Entity
+  └─ P4 has time span ──────────▶ E52 Time-Span
+                                    └─ P81 ongoing throughout ──▶ E61 Time Primitive
+```
+
+In the CSV files, dates are reduced to years CE.
+
 #### CSV Structure (Archaeological Objects)
 The file `data/archaeological_objects/archaeological_objects.csv` contains the following fields:
 
@@ -211,10 +249,10 @@ The file `data/archaeological_objects/archaeological_objects.csv` contains the f
 | `type` | Specific type of the object. | `Abandoned Fortification` |
 | `path` | Full hierarchy path of the object type. | `Place > Military Facility...` |
 | `description` | Detailed historical description and sources. | `In 1208 Hadmar v. Kuenring...` |
-| `begin_from` | Earliest possible beginning of the entity's time-span (year CE); corresponds to CIDOC CRM P82a begin of the begin. | `1200` |
-| `begin_to` | Latest possible beginning of the entity's time-span (year CE); corresponds to CIDOC CRM P81a end of the begin. | `1208` |
-| `end_from` | Earliest possible end of the entity's time-span (year CE); corresponds to CIDOC CRM P81b begin of the end. | `1300` |
-| `end_to` | Latest possible end of the entity's time-span (year CE); corresponds to CIDOC CRM P82b end of the end. | `1321` |
+| `begin_from` | Earliest possible beginning of the entity's time-span (year CE)| `1200` |
+| `begin_to` | Latest possible beginning of the entity's time-span (year CE)| `1208` |
+| `end_from` | Earliest possible end of the entity's time-span (year CE). | `1300` |
+| `end_to` | Latest possible end of the entity's time-span (year CE). | `1321` |
 | `class` | Broad classification (e.g., place). | `place` |
 | `geojson` | GeoJSON representation of the geometry. | `{"type":"Point","coordinates":[16.177, 48.617]}` |
 | `wkt` | Well-Known Text (WKT) representation of the geometry. | `POINT(16.177 48.617)` |
