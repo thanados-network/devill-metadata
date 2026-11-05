@@ -7,9 +7,9 @@
 ## Metadata Dataset of Archaeological Objects and Archive Files
 
 
-[![version](https://img.shields.io/badge/version-1.0-orange)](#)
+[![version](https://img.shields.io/badge/version-1.1-orange)](#)
 [![license](https://img.shields.io/badge/license-CC--BY--4.0-brightgreen)](https://creativecommons.org/licenses/by/4.0/)
-[![date](https://img.shields.io/badge/date-2026--09--09-green)](#)
+[![date](https://img.shields.io/badge/date-2026--11--05-green)](#)
 [![doi](https://img.shields.io/badge/DOI-10.5281/zenodo.22672084-blue)](https://doi.org/10.5281/zenodo.22672084)
 
 **Authors:**   
@@ -162,7 +162,9 @@ It distinguishes three cases: (1) a point that lies within the site and represen
 representing the area within which the site is definitely located, and (3) a polygon representing the precise extent of the site.
 - **Temporal Data:** Dating information is recorded as time spans for the beginning and the end of an entity. This makes it possible to express uncertain or vague dating as well as *termini post*, *ante* and *ad/a quo/ab quo* without losing information (see [Temporal Concept](#temporal-concept)).
 - **Descriptive Metadata:** Detailed descriptions of the sites, including historical context and sources.
-- **Classification:** Categorization based on the OpenAtlas type system (e.g., Abandoned Village, Fortification).
+- **Classification:** Categorisation based on the OpenAtlas type system (e.g., Abandoned Village, Fortification). 
+The categories are taken from the [DeVill Vocabulary](https://devill.oegmn.or.at/vocabulary/). In addition to their 
+textual labels, their URLs and machine-readable identifiers are included in the machine-readable files.  
 - **Identifiers:** Internal IDs and links to the official DeVill and Thanados endpoints.
 - **Relations:** IDs of parent entities that represent the site's hierarchical structure on four levels: 
 Site/Place, Feature, Stratigraphic Unit and Find.
