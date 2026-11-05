@@ -227,10 +227,12 @@ describes both the beginning and the end by a lower and an upper boundary: `begi
 for the beginning, and `begin_of_the_end` and `end_of_the_end` for the end. These correspond to `begin_from`, `begin_to`
 , `end_from` and `end_to` respectively.
 
-In the CIDOC CRM, OpenAtlas models each of these dates as a time primitive. The temporal entity (`E2 Temporal Entity`) 
-that represents the (earliest respectively latest) beginning or the end of the archaeological object is linked via `P4 has time span` to an 
-`E52 Time-Span`. The time span is in turn linked via `P81 ongoing throughout` to an `E61 Time Primitive`, which holds 
-the timestamp of the earliest or latest possible date:
+In CIDOC CRM terms, each of these four dates stored in the OpenAtlas database is expressed as an `E61 Time Primitive`. 
+The dates belong to a temporal entity (`E2 Temporal Entity`) that represents either the beginning or the end of the 
+archaeological object; the earliest and latest possible values of that beginning or end are the two dates of the 
+respective pair (`begin_from`/`begin_to` or `end_from`/`end_to`). The temporal entity is linked via `P4 has time span` to 
+an `E52 Time-Span`, which in turn points via `P81 ongoing throughout` to the `E61 Time Primitive`. In the OpenAtlas 
+database, the value of the time primitive is stored as a PostgreSQL timestamp.
 
 ```
 E2 Temporal Entity
