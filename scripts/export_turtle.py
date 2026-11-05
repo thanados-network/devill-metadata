@@ -45,6 +45,8 @@ def export_turtle():
             "@prefix svcs: <http://rdfs.org/sioc/services#> .",
             "@prefix doap: <http://usefulinc.com/ns/doap#> .",
             "@prefix skos: <http://www.w3.org/2004/02/skos/core#> .",
+            "@prefix dcat: <http://www.w3.org/ns/dcat#> .",
+            "@prefix gsp: <http://www.opengis.net/ont/geosparql#> .",
             ""
         ]
 
@@ -74,7 +76,8 @@ def export_turtle():
                         'edm': 'http://www.europeana.eu/schemas/edm/',
                         'dc': 'http://purl.org/dc/elements/1.1/',
                         'dcterms': 'http://purl.org/dc/terms/',
-                        'ore': 'http://www.openarchives.org/ore/terms/'
+                        'ore': 'http://www.openarchives.org/ore/terms/',
+                        'dcat': 'http://www.w3.org/ns/dcat#'
                     }
 
                     cho = root.find('.//edm:ProvidedCHO', ns_map)
@@ -135,6 +138,7 @@ def export_turtle():
                             pred = f"{prefix}:{tag}"
                             resource = child.get('{%s}resource' % ns_map['rdf'])
                             lang = child.get('{http://www.w3.org/XML/1998/namespace}lang')
+                            datatype = child.get('{%s}datatype' % ns_map['rdf'])
                             
                             line = f"    {pred} "
                             if resource:
@@ -144,6 +148,8 @@ def export_turtle():
                                 line += f'"{val}"'
                                 if lang:
                                     line += f"@{lang}"
+                                elif datatype:
+                                    line += f"^^<{datatype}>"
                             
                             if i == len(cho_children) - 1:
                                 f.write(line + " .\n\n")

@@ -41,6 +41,8 @@ def export_jsonld():
             "svcs": "http://rdfs.org/sioc/services#",
             "doap": "http://usefulinc.com/ns/doap#",
             "skos": "http://www.w3.org/2004/02/skos/core#",
+            "dcat": "http://www.w3.org/ns/dcat#",
+            "gsp": "http://www.opengis.net/ont/geosparql#",
             "type": "@type",
             "id": "@id"
         }
@@ -51,7 +53,8 @@ def export_jsonld():
             'edm': 'http://www.europeana.eu/schemas/edm/',
             'dc': 'http://purl.org/dc/elements/1.1/',
             'dcterms': 'http://purl.org/dc/terms/',
-            'ore': 'http://www.openarchives.org/ore/terms/'
+            'ore': 'http://www.openarchives.org/ore/terms/',
+            'dcat': 'http://www.w3.org/ns/dcat#'
         }
 
         jsonld_graph = []
@@ -86,6 +89,7 @@ def export_jsonld():
                         prop = f"{prefix}:{tag}"
                         resource = child.get('{%s}resource' % ns['rdf'])
                         lang = child.get('{http://www.w3.org/XML/1998/namespace}lang')
+                        datatype = child.get('{%s}datatype' % ns['rdf'])
                         
                         value = None
                         if resource:
@@ -94,6 +98,8 @@ def export_jsonld():
                             text = child.text if child.text else ""
                             if lang:
                                 value = {"@value": text, "@language": lang}
+                            elif datatype:
+                                value = {"@value": text, "@type": datatype}
                             else:
                                 value = text
                         

@@ -246,6 +246,8 @@ The semantic data (RDF, Turtle, JSON-LD) is modelled according to the **[CIDOC C
 | `dcterms` | `http://purl.org/dc/terms/` | Dublin Core Metadata Terms |
 | `rdf` | `http://www.w3.org/1999/02/22-rdf-syntax-ns#` | Resource Description Framework |
 | `rdfs` | `http://www.w3.org/2000/01/rdf-schema#` | RDF Schema |
+| `dcat` | `http://www.w3.org/ns/dcat#` | Data Catalog Vocabulary (`dcat:bbox` in the file metadata) |
+| `gsp` | `http://www.opengis.net/ont/geosparql#` | GeoSPARQL (datatype `gsp:wktLiteral` for WKT geometries) |
 
 ##### Controlled Vocabularies
 To ensure semantic interoperability, the dataset links to established controlled vocabularies and authorities:
@@ -280,6 +282,10 @@ The file `data/files/file-metadata.csv` contains the following fields:
 | `data_provider` | The institution providing the data (e.g., ÖGMN). | `Österreichische Gesellschaft...` |
 | `is_shown_at` | URL to the digital object in its original context (DeVill/OpenAtlas API). | `https://devill.oegmn.or.at/file/235849.svg` |
 | `is_shown_by` | Direct link to the digital file (e.g., PDF/SVG file). | `https://thanados.openatlas.eu/api/display/235849` |
+| `bounding_box` | Georeferenced corners of the image (only for files with a map overlay), as recorded in the source data: JSON list of 2 or 3 corners in the order `[latitude, longitude]` (northing/easting). With 2 corners the points are diagonally opposite; with 3 corners the points are consecutive corners (the second is the corner between the other two). | `[[49.99747,14.99328],[49.998,14.99246]]` |
+| `bbox_wkt` | The image extent as a closed WKT `POLYGON` (WGS84) in the order `longitude latitude`, ready for GIS tools. 2 corners result in an axis-aligned rectangle; 3 corners are completed to a (possibly rotated) rectangle by adding the fourth corner (A + C − B). | `POLYGON((14.99246 49.99747, 14.99328 49.99747, 14.99328 49.998, 14.99246 49.998, 14.99246 49.99747))` |
+
+The columns `bounding_box` and `bbox_wkt` are empty for files without a georeferenced overlay. Entries with invalid values are skipped during export.
 
 
 #### Machine Readable Formats (File Metadata)
@@ -289,8 +295,11 @@ In addition to the tabular CSV format, the file metadata is available in semanti
 -   **[RDF/XML (`.rdf`)](data/files/file-metadata.rdf):** A semantic representation following the **[Europeana Data Model (EDM)](https://europeana.atlassian.net/wiki/spaces/EF/pages/2916974597/Europeana+Data+Model)** and Dublin Core standards, facilitating integration into large-scale cultural heritage platforms.
 -   **[JSON-LD (`.jsonld`)](data/files/file-metadata.jsonld):** A developer-friendly Linked Data format that maps file properties and their relationships to archaeological objects in a structured JSON syntax.
 -   **[Turtle (`.ttl`)](data/files/file-metadata.ttl):** A human-readable serialization of the metadata triples, providing an easy-to-inspect overview of the semantic links and property assignments.
+-   **[GeoJSON (`.geojson`)](data/files/file-metadata.geojson):** A `FeatureCollection` containing all georeferenced files (those with a bounding box). Each feature is the image extent as a `Polygon` (WGS84, order `longitude, latitude`) with the properties `title`, `description_de`, `description_en`, `created`, `is_shown_at`, `is_shown_by`, `api_endpoint` and the original `bounding_box`. Files without a bounding box are not included.
 
 While the CSV file is ideal for quick filtering and overview, these formats provide the necessary technical depth for automated processing and Linked Open Data (LOD) publishing. They include direct references to the digital assets (`isShownBy`) and their landing pages (`isShownAt`), maintaining a persistent link between metadata and the actual digital objects.
+
+For georeferenced images, the RDF/XML, Turtle and JSON-LD files additionally contain the property `dcat:bbox` on the `edm:ProvidedCHO`. Its value is the WKT polygon of the image extent (order `longitude latitude`) with the datatype `gsp:wktLiteral`, identical to `bbox_wkt` in the CSV file. Images with 2 corners are described by an axis-aligned rectangle; for images with 3 corners the fourth corner is derived (A + C − B), which can result in a rotated rectangle.
 
 All formats are located in the `data/files/` directory.
 
