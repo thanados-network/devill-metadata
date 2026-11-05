@@ -1,4 +1,5 @@
 import json
+import math
 
 WKT_LITERAL_DATATYPE = 'http://www.opengis.net/ont/geosparql#wktLiteral'
 
@@ -43,12 +44,28 @@ def _fmt(value):
     return format(value, '.10f').rstrip('0').rstrip('.')
 
 
+def _to_mercator(lat, lon):
+    """Projects (lat, lon) to Web Mercator (EPSG:3857 units, scaled to a unit sphere), as Leaflet does."""
+    return math.radians(lon), math.log(math.tan(math.pi / 4 + math.radians(lat) / 2))
+
+
+def _from_mercator(x, y):
+    """Inverse of _to_mercator, returns (lat, lon)."""
+    return math.degrees(2 * math.atan(math.exp(y)) - math.pi / 2), math.degrees(x)
+
+
 def bbox_to_ring(corners):
     """
-    Builds the closed ring of (lat, lon) tuples from 2 or 3 (lat, lon) corners.
-    2 corners: diagonally opposite corners -> axis-aligned rectangle.
-    3 corners: A, B, C with B as the middle corner -> fourth corner D = A + C - B.
+    Builds the closed ring of (lat, lon) tuples that outlines the image, following the
+    Leaflet conventions. The exterior ring is oriented counterclockwise (lon/lat plane).
     Returns None for invalid input.
+
+    2 corners: L.imageOverlay bounds. Any two diagonally opposite corners (south-west and
+        north-east) span an axis-aligned rectangle (edges along parallels and meridians).
+    3 corners: leaflet.imageoverlay.rotated, in the order [topleft, topright, bottomleft].
+        The fourth corner is bottomright = topright + bottomleft - topleft, calculated in
+        the projected (Web Mercator) plane as the plugin does when it draws the image.
+        The ring runs topleft, topright, bottomright, bottomleft.
     """
     if not corners or len(corners) not in (2, 3):
         return None
@@ -64,9 +81,24 @@ def bbox_to_ring(corners):
             (lat_max, lon_min),
         ]
     else:
-        a, b, c = corners
-        d = (a[0] + c[0] - b[0], a[1] + c[1] - b[1])
-        ring = [a, b, c, d]
+        top_left, top_right, bottom_left = corners
+        try:
+            tlx, tly = _to_mercator(*top_left)
+            trx, try_ = _to_mercator(*top_right)
+            blx, bly = _to_mercator(*bottom_left)
+        except (ValueError, OverflowError):
+            return None
+        bottom_right = _from_mercator(trx + blx - tlx, try_ + bly - tly)
+        ring = [top_left, top_right, bottom_right, bottom_left]
+
+    area2 = sum(
+        ring[i][1] * ring[(i + 1) % 4][0] - ring[(i + 1) % 4][1] * ring[i][0]
+        for i in range(4)
+    )
+    if area2 == 0:
+        return None
+    if area2 < 0:
+        ring.reverse()
 
     ring.append(ring[0])
     return ring
@@ -93,12 +125,6 @@ def bbox_to_geojson_geometry(corners):
     if ring is None:
         return None
     coords = [[float(_fmt(lon)), float(_fmt(lat))] for lat, lon in ring]
-    area2 = sum(
-        coords[i][0] * coords[i + 1][1] - coords[i + 1][0] * coords[i][1]
-        for i in range(len(coords) - 1)
-    )
-    if area2 < 0:
-        coords.reverse()
     return {"type": "Polygon", "coordinates": [coords]}
 
 
