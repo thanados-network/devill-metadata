@@ -160,6 +160,7 @@ Detailed information about deserted medieval villages and related archaeological
 therefore applies a concept that assumes 100% certainty of the localisation but allows for varying precision. 
 It distinguishes three cases: (1) a point that lies within the site and represents its central location, (2) a polygon 
 representing the area within which the site is definitely located, and (3) a polygon representing the precise extent of the site.
+Linestring geometries are treated like polygons, i.e. they are assigned the quality `area` or `shape`. The quality is stored in the field `geometry_quality` (see below).
 - **Temporal Data:** Dating information is recorded as time spans for the beginning and the end of an entity. This makes it possible to express uncertain or vague dating as well as *termini post*, *ante* and *ad/a quo/ab quo* without losing information (see [Temporal Concept](#temporal-concept)).
 - **Descriptive Metadata:** Detailed descriptions of the sites, including historical context and sources.
 - **Classification:** Categorisation based on the OpenAtlas type system (e.g., Abandoned Village, Fortification). 
@@ -224,8 +225,8 @@ latest possible end.
 
 A similar approach is used in CIDOC CRM-based [Linked Art](https://linked.art/api/1.0/shared/timespan/), whose `TimeSpan` 
 describes both the beginning and the end by a lower and an upper boundary: `begin_of_the_begin` and `end_of_the_begin` 
-for the beginning, and `begin_of_the_end` and `end_of_the_end` for the end. These correspond to `begin_from`, `begin_to`
-, `end_from` and `end_to` respectively.
+for the beginning, and `begin_of_the_end` and `end_of_the_end` for the end. These correspond to `begin_from`, `begin_to`,
+`end_from` and `end_to` respectively.
 
 In CIDOC CRM terms, each of these four dates stored in the OpenAtlas database is expressed as an `E61 Time Primitive`. 
 The dates belong to a temporal entity (`E2 Temporal Entity`) that represents either the beginning or the end of the 
@@ -240,7 +241,7 @@ E2 Temporal Entity
                                     └─ P81 ongoing throughout ──▶ E61 Time Primitive
 ```
 
-In the CSV files, dates are reduced to years CE.
+In the CSV files, dates are reduced to years CE. The exact dates (day precision), as in the examples above, are available in the RDF, JSON-LD and Turtle files of the archaeological objects (properties `begin_of_the_begin`, `end_of_the_begin`, `begin_of_the_end` and `end_of_the_end`).
 
 #### CSV Structure (Archaeological Objects)
 The file `data/archaeological_objects/archaeological_objects.csv` contains the following fields:
@@ -272,9 +273,10 @@ To facilitate seamless data integration, interoperability, and long-term digital
 - **RDF/XML (`.rdf`):** A formal Linked Data representation based on the [Linked Art](https://linked.art) profile for cultural heritage.
 - **JSON-LD (`.jsonld`):** A JSON-based format for Linked Data, optimized for easy integration into modern web applications and APIs.
 - **Turtle (`.ttl`):** A concise, human-readable RDF syntax that simplifies the inspection and manual editing of semantic relationships.
-- **GeoJSON (`.geojson`):** A geographic data format containing all archaeological objects classified as `place` that possess spatial geometries, facilitating GIS integration and web mapping.
+- **GeoJSON (`.geojson`):** A geographic data format containing all archaeological objects classified as `place` that possess spatial geometries, facilitating GIS integration and web mapping. Each feature has the properties `name`, `type`, `class`, `description`, `devill_endpoint` and `geometry_quality`.
 
-While the CSV version is primarily designed for human review and basic tabular analysis, the RDF, JSON-LD, and Turtle exports provide a rich, graph-based representation of the data. These formats include granular semantic metadata and complex relationships—such as links to external authorities and specific CIDOC CRM mappings—that are not captured in the simplified CSV structure.
+While the CSV version is primarily designed for human review and basic tabular analysis, the RDF, JSON-LD, and Turtle exports provide a rich, graph-based representation of the data. These formats include granular semantic metadata and complex relationships—such as links to external authorities and specific CIDOC CRM mappings—that are not captured in the simplified CSV structure. Note that `geometry_quality` is only part of the CSV and GeoJSON files and is not contained in the RDF, JSON-LD and Turtle files.
+
 
 
 ##### Ontologies & Namespaces
@@ -288,14 +290,24 @@ The semantic data (RDF, Turtle, JSON-LD) is modelled according to the **[CIDOC C
 | `dcterms` | `http://purl.org/dc/terms/` | Dublin Core Metadata Terms |
 | `rdf` | `http://www.w3.org/1999/02/22-rdf-syntax-ns#` | Resource Description Framework |
 | `rdfs` | `http://www.w3.org/2000/01/rdf-schema#` | RDF Schema |
+| `skos` | `http://www.w3.org/2004/02/skos/core#` | Simple Knowledge Organization System |
+| `xsd` | `http://www.w3.org/2001/XMLSchema#` | XML Schema datatypes |
+| `dig` | `http://www.ics.forth.gr/isl/CRMdig/` | CRMdig, extension of CIDOC CRM for digital provenance |
+| `edm` | `http://www.europeana.eu/schemas/edm/` | Europeana Data Model (file metadata) |
+| `ore` | `http://www.openarchives.org/ore/terms/` | OAI Object Reuse and Exchange (`ore:Aggregation`, file metadata) |
+| `cc` | `http://creativecommons.org/ns#` | Creative Commons rights vocabulary (file metadata) |
+| `odrl` | `http://www.w3.org/ns/odrl/2/` | Open Digital Rights Language (file metadata) |
+| `svcs` | `http://rdfs.org/sioc/services#` | SIOC Services (file metadata) |
+| `doap` | `http://usefulinc.com/ns/doap#` | Description of a Project (file metadata) |
 | `dcat` | `http://www.w3.org/ns/dcat#` | Data Catalog Vocabulary (`dcat:bbox` in the file metadata) |
 | `gsp` | `http://www.opengis.net/ont/geosparql#` | GeoSPARQL (datatype `gsp:wktLiteral` for WKT geometries) |
 
 ##### Controlled Vocabularies
 To ensure semantic interoperability, the dataset links to established controlled vocabularies and authorities:
-- **[Getty Art & Architecture Thesaurus (AAT)](https://www.getty.edu/research/tools/vocabularies/aat/):** Used for classifying object types, materials, and techniques (e.g., `aat:300033618` for paintings).
-- **[Wikidata](https://www.wikidata.org/):** Used for linking to global entities and providing multilingual labels.
-- **[GeoNames](https://www.geonames.org/):** Used for spatial referencing and administrative units.
+- **[DeVill Vocabulary](https://devill.oegmn.or.at/vocabulary/):** The types of the archaeological objects (e.g., Abandoned Village, Fortification) are taken from the project's own vocabulary, which is based on the OpenAtlas type system.
+- **[Getty Art & Architecture Thesaurus (AAT)](https://www.getty.edu/research/tools/vocabularies/aat/):** Used for linking object types, materials and subjects to established concepts (e.g., `https://vocab.getty.edu/aat/300167671`).
+- **[Wikidata](https://www.wikidata.org/):** Used for linking to global entities (e.g., `https://www.wikidata.org/entity/Q350895`).
+- **[GeoNames](https://www.geonames.org/):** Used sparingly for linking places (e.g., `https://www.geonames.org/2776601`).
 
 All formats are located in the `data/archaeological_objects/` directory.
 
@@ -394,6 +406,10 @@ The file `data/crossrefs/object_file_relation.csv` contains the following fields
 
 ## Project Structure
 
+- `README.md`, `install.md`: Dataset documentation and technical setup.
+- `CITATION.cff`, `.zenodo.json`: Citation and Zenodo metadata (version, authors, license).
+- `LICENSE`: CC BY 4.0 license text.
+- `assets/`: Images used in this documentation (e.g., the web portal screenshot).
 - `data/`: Contains the exported metadata.
   - `archaeological_objects/`: Datasets for the found objects in all formats.
   - `files/`: Metadata for the associated media files.
