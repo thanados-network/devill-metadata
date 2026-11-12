@@ -48,12 +48,29 @@ def export_archaeological_objects():
             e.openatlas_class_name AS class,
             e.geom AS "GeoJSON",
             ST_AsText(e.geom) AS "WKT",
-            e.lon,
-            e.lat,
+            g.geometry_quality AS geometry_quality,
+            e.lat AS lon,
+            e.lon AS lat,
             'https://devill.oegmn.or.at/entity/' || e.child_id AS devill_endpoint,
             'https://thanados.openatlas.eu/api/entity/' || e.child_id AS api_endpoint
         FROM devill.entitiestmp e
         LEFT JOIN devill.maintype m ON e.child_id = m.entity_id
+        LEFT JOIN LATERAL (
+            SELECT gis.type AS geometry_quality
+            FROM model.link l
+            JOIN model.gis gis ON gis.entity_id = l.range_id
+            WHERE l.domain_id = e.child_id
+              AND l.property_code = 'P53'
+              AND e.geom IS NOT NULL
+              AND (
+                (ST_GeometryType(e.geom) IN ('ST_Point', 'ST_MultiPoint')
+                    AND gis.type = 'centerpoint')
+                OR (ST_GeometryType(e.geom) NOT IN ('ST_Point', 'ST_MultiPoint')
+                    AND gis.type IN ('area', 'shape'))
+              )
+            ORDER BY gis.type
+            LIMIT 1
+        ) g ON TRUE
         WHERE e.child_id != 0;
         """
         

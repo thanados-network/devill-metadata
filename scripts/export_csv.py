@@ -7,6 +7,7 @@ import csv
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from scripts.db_connect import connect
+from scripts.bbox_utils import load_bounding_boxes
 
 def export_csv():
     """
@@ -29,6 +30,9 @@ def export_csv():
         cur.execute(sql)
         rows = cur.fetchall()
 
+        print("Fetching bounding boxes from web.map_overlay...")
+        bounding_boxes = load_bounding_boxes(cur)
+
         # Namespaces for parsing XML
         ns = {
             'rdf': 'http://www.w3.org/1999/02/22-rdf-syntax-ns#',
@@ -42,7 +46,8 @@ def export_csv():
         csv_headers = [
             'id', 'title', 'description_de', 'description_en', 
             'subjects', 'spatial', 'temporal', 'created', 'filetype', 'mimetype', 'rights',
-            'data_provider', 'is_shown_at', 'is_shown_by', 'api_endpoint'
+            'data_provider', 'is_shown_at', 'is_shown_by', 'api_endpoint',
+            'bounding_box', 'bbox_wkt'
         ]
 
         print(f"Writing CSV export to {output_path}...")
@@ -148,6 +153,12 @@ def export_csv():
 
                     # api_endpoint
                     data['api_endpoint'] = f"https://thanados.openatlas.eu/api/entity/{db_id}"
+
+                    # bounding_box (original [[lat,lon],...]) and bbox_wkt (POLYGON, lon lat)
+                    bbox = bounding_boxes.get(db_id)
+                    if bbox:
+                        data['bounding_box'] = bbox['raw']
+                        data['bbox_wkt'] = bbox['wkt']
 
                     writer.writerow(data)
 

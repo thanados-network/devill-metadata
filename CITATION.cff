@@ -34,7 +34,8 @@ contact:
     post-code: "1190"
     country: AT
     website: "https://oegmn.or.at"
-version: 1.0
+version: "1.1"
+doi: "10.5281/zenodo.22672084"
 repository-code: "https://github.com/thanados-network/devill-metadata"
 keywords:
   - archaeology
@@ -46,7 +47,7 @@ keywords:
   - open data
   - CIDOC CRM
   - linked data
-date-released: 2026-09-09
+date-released: 2026-11-12
 url: "https://devill.oegmn.or.at"
 license: CC-BY-4.0
 abstract: >-

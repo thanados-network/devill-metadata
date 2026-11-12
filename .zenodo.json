@@ -34,7 +34,7 @@
     {
       "name": "Koschiček-Krombholz, Bernhard",
       "orcid": "0000-0001-7608-7446",
-      "affiliation": "Austrian Society for Medieval and Modern Archaeology (ÖGMN)"
+      "affiliation": "Natural History Museum Vienna"
     },
     {
       "name": "Kühtreiber, Thomas",
@@ -55,6 +55,8 @@
     "linked data"
   ],
   "upload_type": "dataset",
+  "version": "1.1",
+  "publication_date": "2026-11-12",
   "access_right": "open",
   "license": "CC-BY-4.0",
   "language": "eng",

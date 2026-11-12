@@ -7,9 +7,9 @@
 ## Metadata Dataset of Archaeological Objects and Archive Files
 
 
-[![version](https://img.shields.io/badge/version-1.0-orange)](#)
+[![version](https://img.shields.io/badge/version-1.1-orange)](#)
 [![license](https://img.shields.io/badge/license-CC--BY--4.0-brightgreen)](https://creativecommons.org/licenses/by/4.0/)
-[![date](https://img.shields.io/badge/date-2026--09--09-green)](#)
+[![date](https://img.shields.io/badge/date-2026--11--12-green)](#)
 [![doi](https://img.shields.io/badge/DOI-10.5281/zenodo.22672084-blue)](https://doi.org/10.5281/zenodo.22672084)
 
 **Authors:**   
@@ -38,6 +38,7 @@
 - [Funding Statement](#funding-statement)
 - [Dataset Description](#dataset-description)
   - [1. Archaeological Objects](#1-archaeological-objects)
+    - [Temporal Concept](#temporal-concept)
     - [CSV Structure (Archaeological Objects)](#csv-structure-archaeological-objects)
     - [Machine Readable Formats (Archaeological Objects)](#machine-readable-formats-archaeological-objects)
       - [Ontologies & Namespaces](#ontologies--namespaces)
@@ -155,10 +156,16 @@ These two components are linked (n:n) via their IDs in a cross-referencing table
 ### 1. Archaeological Objects
 Detailed information about deserted medieval villages and related archaeological sites, including:
 - **Spatial Data:** Point coordinates (WGS84) and where applicable polygon or linestring geometries.
-- **Spatial uncertainty:** Spatial precision varies according to the heterogeneous legacy documentation. Some polygons represent potential localisation areas rather than securely delimited settlement extents. No uniform quantitative positional-accuracy measure is available in the legacy archive.
-- **Temporal Data:** Dating information (Begin/End ranges).
+- **Spatial quality:** Due to the heterogeneous legacy documentation, spatial precision varies. The digitised archive 
+therefore applies a concept that assumes 100% certainty of the localisation but allows for varying precision. 
+It distinguishes three cases: (1) a point that lies within the site and represents its central location, (2) a polygon 
+representing the area within which the site is definitely located, and (3) a polygon representing the precise extent of the site.
+Linestring geometries are treated like polygons, i.e. they are assigned the quality `area` or `shape`. The quality is stored in the field `geometry_quality` (see below).
+- **Temporal Data:** Dating information is recorded as time spans for the beginning and the end of an entity. This makes it possible to express uncertain or vague dating as well as *termini post*, *ante* and *ad/a quo/ab quo* without losing information (see [Temporal Concept](#temporal-concept)).
 - **Descriptive Metadata:** Detailed descriptions of the sites, including historical context and sources.
-- **Classification:** Categorization based on the OpenAtlas type system (e.g., Abandoned Village, Fortification).
+- **Classification:** Categorisation based on the OpenAtlas type system (e.g., Abandoned Village, Fortification). 
+The categories are taken from the [DeVill Vocabulary](https://devill.oegmn.or.at/vocabulary/). In addition to their 
+textual labels, their URLs and machine-readable identifiers are included in the machine-readable files.  
 - **Identifiers:** Internal IDs and links to the official DeVill and Thanados endpoints.
 - **Relations:** IDs of parent entities that represent the site's hierarchical structure on four levels: 
 Site/Place, Feature, Stratigraphic Unit and Find.
@@ -200,6 +207,42 @@ graph TD
 ```
 *Figure 2: Example hierarchical structure of archaeological objects (Place > Feature > Stratigraphic Unit > Artifact).*
 
+#### Temporal Concept
+Each entity can have up to four dates (`begin_from`, `begin_to`, `end_from`, `end_to`), following the [OpenAtlas date model](https://redmine.openatlas.eu/projects/uni/wiki/Expanded_dates). Which of the fields are filled determines the meaning of the dating:
+
+| Dating information | Meaning | Filled fields | Example |
+| :--- | :--- | :--- | :--- |
+| *Terminus post quem* | Earliest possible boundary: the event happened **after** this date. | Only `begin_from` (for a beginning) or only `end_from` (for an end). | **Begin:** A coin minted in AD 1250 is found in the construction layer of a farmstead: the building cannot have been erected before then (`begin_from = 1250-01-01`). <br> **End:** A tax register of 1520 still lists the farmstead as inhabited: it cannot have been abandoned before then (`end_from = 1520-01-01`). |
+| *Terminus ante quem* | Latest possible boundary: the event happened **before** this date. | Only `begin_to` (for a beginning) or only `end_to` (for an end). | **Begin:** A village is mentioned for the first time in a charter of 12 March 1190: it must have existed by then (`begin_to = 1190-03-12`). <br> **End:** A cadastral map of 1823 shows the former village area as ploughland: the village must have been deserted before then (`end_to = 1823-01-01`). |
+| *Terminus ad quem / a quo / ab quo* | A fixed point or period at which something begins or ends: the exact window is known. | `begin_from` and `begin_to`, or `end_from` and `end_to`. | **Begin:** A church is consecrated between 1 May and 30 June 1275: it was completed within this window (`begin_from = 1275-05-01`, `begin_to = 1275-06-30`). <br> **End:** A written source reports that the village was destroyed in a feud between June and August 1446 (`end_from = 1446-06-01`, `end_to = 1446-08-31`). |
+
+In OpenAtlas the dates are stored as timestamps in the fields `begin_from`, `begin_to`, `end_from` and `end_to`.
+
+This concept is inspired by the temporal model of [GeoJSON-T](https://github.com/kgeographer/geojson-t), which describes 
+the `start` and the `end` of a `when` timespan, each with an `earliest` and a `latest` value. Accordingly, `begin_from` 
+and `begin_to` correspond to the earliest and latest possible beginning, and `end_from` and `end_to` to the earliest and
+latest possible end.
+
+A similar approach is used in CIDOC CRM-based [Linked Art](https://linked.art/api/1.0/shared/timespan/), whose `TimeSpan` 
+describes both the beginning and the end by a lower and an upper boundary: `begin_of_the_begin` and `end_of_the_begin` 
+for the beginning, and `begin_of_the_end` and `end_of_the_end` for the end. These correspond to `begin_from`, `begin_to`,
+`end_from` and `end_to` respectively.
+
+In CIDOC CRM terms, each of these four dates stored in the OpenAtlas database is expressed as an `E61 Time Primitive`. 
+The dates belong to a temporal entity (`E2 Temporal Entity`) that represents either the beginning or the end of the 
+archaeological object; the earliest and latest possible values of that beginning or end are the two dates of the 
+respective pair (`begin_from`/`begin_to` or `end_from`/`end_to`). The temporal entity is linked via `P4 has time span` to 
+an `E52 Time-Span`, which in turn points via `P81 ongoing throughout` to the `E61 Time Primitive`. In the OpenAtlas 
+database, the value of the time primitive is stored as a PostgreSQL timestamp.
+
+```
+E2 Temporal Entity
+  └─ P4 has time span ──────────▶ E52 Time-Span
+                                    └─ P81 ongoing throughout ──▶ E61 Time Primitive
+```
+
+In the CSV files, dates are reduced to years CE. The exact dates (day precision), as in the examples above, are available in the RDF, JSON-LD and Turtle files of the archaeological objects (properties `begin_of_the_begin`, `end_of_the_begin`, `begin_of_the_end` and `end_of_the_end`).
+
 #### CSV Structure (Archaeological Objects)
 The file `data/archaeological_objects/archaeological_objects.csv` contains the following fields:
 
@@ -211,13 +254,14 @@ The file `data/archaeological_objects/archaeological_objects.csv` contains the f
 | `type` | Specific type of the object. | `Abandoned Fortification` |
 | `path` | Full hierarchy path of the object type. | `Place > Military Facility...` |
 | `description` | Detailed historical description and sources. | `In 1208 Hadmar v. Kuenring...` |
-| `begin_from` | Earliest possible beginning of the entity's time-span (year CE); corresponds to CIDOC CRM P82a begin of the begin. | `1200` |
-| `begin_to` | Latest possible beginning of the entity's time-span (year CE); corresponds to CIDOC CRM P81a end of the begin. | `1208` |
-| `end_from` | Earliest possible end of the entity's time-span (year CE); corresponds to CIDOC CRM P81b begin of the end. | `1300` |
-| `end_to` | Latest possible end of the entity's time-span (year CE); corresponds to CIDOC CRM P82b end of the end. | `1321` |
+| `begin_from` | Earliest possible beginning of the entity's time-span (year CE)| `1200` |
+| `begin_to` | Latest possible beginning of the entity's time-span (year CE)| `1208` |
+| `end_from` | Earliest possible end of the entity's time-span (year CE). | `1300` |
+| `end_to` | Latest possible end of the entity's time-span (year CE). | `1321` |
 | `class` | Broad classification (e.g., place). | `place` |
 | `geojson` | GeoJSON representation of the geometry. | `{"type":"Point","coordinates":[16.177, 48.617]}` |
 | `wkt` | Well-Known Text (WKT) representation of the geometry. | `POINT(16.177 48.617)` |
+| `geometry_quality` | Quality of the localisation: `centerpoint` is a single point recorded as the location of the site; `area` is an area within which the site has been located; `shape` is a polygon that marks the physical extent of the site. | `centerpoint`, `area`, `shape` |
 | `lon` / `lat` | Longitude and latitude coordinates (WGS84). | `16.1779` / `48.6177` |
 | `devill_endpoint` | URL to the object in the DeVill archive. | `https://devill.oegmn.or.at/entity/173247` |
 | `api_endpoint` | Link to the OpenAtlas API record for this object. | `https://thanados.openatlas.eu/api/entity/173247` |
@@ -229,9 +273,10 @@ To facilitate seamless data integration, interoperability, and long-term digital
 - **RDF/XML (`.rdf`):** A formal Linked Data representation based on the [Linked Art](https://linked.art) profile for cultural heritage.
 - **JSON-LD (`.jsonld`):** A JSON-based format for Linked Data, optimized for easy integration into modern web applications and APIs.
 - **Turtle (`.ttl`):** A concise, human-readable RDF syntax that simplifies the inspection and manual editing of semantic relationships.
-- **GeoJSON (`.geojson`):** A geographic data format containing all archaeological objects classified as `place` that possess spatial geometries, facilitating GIS integration and web mapping.
+- **GeoJSON (`.geojson`):** A geographic data format containing all archaeological objects classified as `place` that possess spatial geometries, facilitating GIS integration and web mapping. Each feature has the properties `name`, `type`, `class`, `description`, `devill_endpoint` and `geometry_quality`.
 
-While the CSV version is primarily designed for human review and basic tabular analysis, the RDF, JSON-LD, and Turtle exports provide a rich, graph-based representation of the data. These formats include granular semantic metadata and complex relationships—such as links to external authorities and specific CIDOC CRM mappings—that are not captured in the simplified CSV structure.
+While the CSV version is primarily designed for human review and basic tabular analysis, the RDF, JSON-LD, and Turtle exports provide a rich, graph-based representation of the data. These formats include granular semantic metadata and complex relationships—such as links to external authorities and specific CIDOC CRM mappings—that are not captured in the simplified CSV structure. Note that `geometry_quality` is only part of the CSV and GeoJSON files and is not contained in the RDF, JSON-LD and Turtle files.
+
 
 
 ##### Ontologies & Namespaces
@@ -245,12 +290,24 @@ The semantic data (RDF, Turtle, JSON-LD) is modelled according to the **[CIDOC C
 | `dcterms` | `http://purl.org/dc/terms/` | Dublin Core Metadata Terms |
 | `rdf` | `http://www.w3.org/1999/02/22-rdf-syntax-ns#` | Resource Description Framework |
 | `rdfs` | `http://www.w3.org/2000/01/rdf-schema#` | RDF Schema |
+| `skos` | `http://www.w3.org/2004/02/skos/core#` | Simple Knowledge Organization System |
+| `xsd` | `http://www.w3.org/2001/XMLSchema#` | XML Schema datatypes |
+| `dig` | `http://www.ics.forth.gr/isl/CRMdig/` | CRMdig, extension of CIDOC CRM for digital provenance |
+| `edm` | `http://www.europeana.eu/schemas/edm/` | Europeana Data Model (file metadata) |
+| `ore` | `http://www.openarchives.org/ore/terms/` | OAI Object Reuse and Exchange (`ore:Aggregation`, file metadata) |
+| `cc` | `http://creativecommons.org/ns#` | Creative Commons rights vocabulary (file metadata) |
+| `odrl` | `http://www.w3.org/ns/odrl/2/` | Open Digital Rights Language (file metadata) |
+| `svcs` | `http://rdfs.org/sioc/services#` | SIOC Services (file metadata) |
+| `doap` | `http://usefulinc.com/ns/doap#` | Description of a Project (file metadata) |
+| `dcat` | `http://www.w3.org/ns/dcat#` | Data Catalog Vocabulary (`dcat:bbox` in the file metadata) |
+| `gsp` | `http://www.opengis.net/ont/geosparql#` | GeoSPARQL (datatype `gsp:wktLiteral` for WKT geometries) |
 
 ##### Controlled Vocabularies
 To ensure semantic interoperability, the dataset links to established controlled vocabularies and authorities:
-- **[Getty Art & Architecture Thesaurus (AAT)](https://www.getty.edu/research/tools/vocabularies/aat/):** Used for classifying object types, materials, and techniques (e.g., `aat:300033618` for paintings).
-- **[Wikidata](https://www.wikidata.org/):** Used for linking to global entities and providing multilingual labels.
-- **[GeoNames](https://www.geonames.org/):** Used for spatial referencing and administrative units.
+- **[DeVill Vocabulary](https://devill.oegmn.or.at/vocabulary/):** The types of the archaeological objects (e.g., Abandoned Village, Fortification) are taken from the project's own vocabulary, which is based on the OpenAtlas type system.
+- **[Getty Art & Architecture Thesaurus (AAT)](https://www.getty.edu/research/tools/vocabularies/aat/):** Used for linking object types, materials and subjects to established concepts (e.g., `https://vocab.getty.edu/aat/300167671`).
+- **[Wikidata](https://www.wikidata.org/):** Used for linking to global entities (e.g., `https://www.wikidata.org/entity/Q350895`).
+- **[GeoNames](https://www.geonames.org/):** Used sparingly for linking places (e.g., `https://www.geonames.org/2776601`).
 
 All formats are located in the `data/archaeological_objects/` directory.
 
@@ -279,6 +336,10 @@ The file `data/files/file-metadata.csv` contains the following fields:
 | `data_provider` | The institution providing the data (e.g., ÖGMN). | `Österreichische Gesellschaft...` |
 | `is_shown_at` | URL to the digital object in its original context (DeVill/OpenAtlas API). | `https://devill.oegmn.or.at/file/235849.svg` |
 | `is_shown_by` | Direct link to the digital file (e.g., PDF/SVG file). | `https://thanados.openatlas.eu/api/display/235849` |
+| `bounding_box` | Georeferenced corners of the image (only for files with georeferencing), as recorded in the source data: JSON list of 2 or 3 corners in the order `[latitude, longitude]` (northing/easting). The format follows Leaflet: with 2 corners the points are diagonally opposite corners (south-west/north-east) as used for [`L.imageOverlay`](https://leafletjs.com/reference.html#imageoverlay); with 3 corners the points are `[topleft, topright, bottomleft]` as used for [`leaflet.imageoverlay.rotated`](https://github.com/IvanSanchez/Leaflet.ImageOverlay.Rotated). | `[[49.99747,14.99328],[49.998,14.99246]]` |
+| `bbox_wkt` | The image extent as a closed WKT `POLYGON` (WGS84) in the order `longitude latitude`, ready for GIS tools. 2 corners result in an axis-aligned rectangle; 3 corners are completed to a (possibly rotated) rectangle by adding the fourth corner `bottomright = topright + bottomleft − topleft` (calculated in Web Mercator, as Leaflet does). The ring is oriented counterclockwise. | `POLYGON((14.99246 49.99747, 14.99328 49.99747, 14.99328 49.998, 14.99246 49.998, 14.99246 49.99747))` |
+
+The columns `bounding_box` and `bbox_wkt` are empty for files without a georeferenced overlay. Entries with invalid values are skipped during export.
 
 
 #### Machine Readable Formats (File Metadata)
@@ -288,8 +349,11 @@ In addition to the tabular CSV format, the file metadata is available in semanti
 -   **[RDF/XML (`.rdf`)](data/files/file-metadata.rdf):** A semantic representation following the **[Europeana Data Model (EDM)](https://europeana.atlassian.net/wiki/spaces/EF/pages/2916974597/Europeana+Data+Model)** and Dublin Core standards, facilitating integration into large-scale cultural heritage platforms.
 -   **[JSON-LD (`.jsonld`)](data/files/file-metadata.jsonld):** A developer-friendly Linked Data format that maps file properties and their relationships to archaeological objects in a structured JSON syntax.
 -   **[Turtle (`.ttl`)](data/files/file-metadata.ttl):** A human-readable serialization of the metadata triples, providing an easy-to-inspect overview of the semantic links and property assignments.
+-   **[GeoJSON (`.geojson`)](data/files/file-metadata.geojson):** A `FeatureCollection` containing all georeferenced files (those with a bounding box). Each feature is the image extent as a `Polygon` (WGS84, order `longitude, latitude`) with the properties `title`, `description_de`, `description_en`, `created`, `is_shown_at`, `is_shown_by`, `api_endpoint` and the original `bounding_box`. Files without a bounding box are not included.
 
 While the CSV file is ideal for quick filtering and overview, these formats provide the necessary technical depth for automated processing and Linked Open Data (LOD) publishing. They include direct references to the digital assets (`isShownBy`) and their landing pages (`isShownAt`), maintaining a persistent link between metadata and the actual digital objects.
+
+For georeferenced images, the RDF/XML, Turtle and JSON-LD files additionally contain the property `dcat:bbox` on the `edm:ProvidedCHO`. Its value is the WKT polygon of the image extent (order `longitude latitude`) with the datatype `gsp:wktLiteral`, identical to `bbox_wkt` in the CSV file. Images with 2 corners are described by an axis-aligned rectangle; for images with 3 corners (`topleft`, `topright`, `bottomleft`) the fourth corner is derived (`bottomright = topright + bottomleft − topleft`), which can result in a rotated rectangle.
 
 All formats are located in the `data/files/` directory.
 
@@ -342,6 +406,10 @@ The file `data/crossrefs/object_file_relation.csv` contains the following fields
 
 ## Project Structure
 
+- `README.md`, `install.md`: Dataset documentation and technical setup.
+- `CITATION.cff`, `.zenodo.json`: Citation and Zenodo metadata (version, authors, license).
+- `LICENSE`: CC BY 4.0 license text.
+- `assets/`: Images used in this documentation (e.g., the web portal screenshot).
 - `data/`: Contains the exported metadata.
   - `archaeological_objects/`: Datasets for the found objects in all formats.
   - `files/`: Metadata for the associated media files.

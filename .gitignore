@@ -4,6 +4,7 @@
 *.swp
 *.swo
 .DS_Store
+.junie/
 
 # Temporary files
 *.tmp

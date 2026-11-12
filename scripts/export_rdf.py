@@ -49,7 +49,9 @@ def export_rdf_collection():
         rdf_content.append('         xmlns:cc="http://creativecommons.org/ns#"')
         rdf_content.append('         xmlns:odrl="http://www.w3.org/ns/odrl/2/"')
         rdf_content.append('         xmlns:svcs="http://rdfs.org/sioc/services#"')
-        rdf_content.append('         xmlns:doap="http://usefulinc.com/ns/doap#">')
+        rdf_content.append('         xmlns:doap="http://usefulinc.com/ns/doap#"')
+        rdf_content.append('         xmlns:dcat="http://www.w3.org/ns/dcat#"')
+        rdf_content.append('         xmlns:gsp="http://www.opengis.net/ont/geosparql#">')
 
         for row in rows:
             edm_xml = row[0]
@@ -74,6 +76,8 @@ def export_rdf_collection():
                     ET.register_namespace('odrl', 'http://www.w3.org/ns/odrl/2/')
                     ET.register_namespace('svcs', 'http://rdfs.org/sioc/services#')
                     ET.register_namespace('doap', 'http://usefulinc.com/ns/doap#')
+                    ET.register_namespace('dcat', 'http://www.w3.org/ns/dcat#')
+                    ET.register_namespace('gsp', 'http://www.opengis.net/ont/geosparql#')
 
                     cho = root.find('.//edm:ProvidedCHO', ns)
                     agg = root.find('.//ore:Aggregation', ns)

@@ -36,12 +36,28 @@ def export_geojson():
                 'name', e.child_name,
                 'type', m.name,
                 'class', e.openatlas_class_name,
+                'geometry_quality', g.geometry_quality,
                 'description', e.description,
                 'devill_endpoint', 'https://devill.oegmn.or.at/entity/' || e.child_id
             )
         )
         FROM devill.entitiestmp e
         LEFT JOIN devill.maintype m ON e.child_id = m.entity_id
+        LEFT JOIN LATERAL (
+            SELECT gis.type AS geometry_quality
+            FROM model.link l
+            JOIN model.gis gis ON gis.entity_id = l.range_id
+            WHERE l.domain_id = e.child_id
+              AND l.property_code = 'P53'
+              AND (
+                (ST_GeometryType(e.geom) IN ('ST_Point', 'ST_MultiPoint')
+                    AND gis.type = 'centerpoint')
+                OR (ST_GeometryType(e.geom) NOT IN ('ST_Point', 'ST_MultiPoint')
+                    AND gis.type IN ('area', 'shape'))
+              )
+            ORDER BY gis.type
+            LIMIT 1
+        ) g ON TRUE
         WHERE e.openatlas_class_name = 'place' 
           AND e.geom IS NOT NULL;
         """
