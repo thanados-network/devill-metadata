@@ -9,7 +9,7 @@
 
 [![version](https://img.shields.io/badge/version-1.1-orange)](#)
 [![license](https://img.shields.io/badge/license-CC--BY--4.0-brightgreen)](https://creativecommons.org/licenses/by/4.0/)
-[![date](https://img.shields.io/badge/date-2026--11--05-green)](#)
+[![date](https://img.shields.io/badge/date-2026--11--12-green)](#)
 [![doi](https://img.shields.io/badge/DOI-10.5281/zenodo.22672084-blue)](https://doi.org/10.5281/zenodo.22672084)
 
 **Authors:**   
